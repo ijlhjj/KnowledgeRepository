@@ -7,3 +7,16 @@
     在Java中进行显式配置；
     隐式的bean发现机制和自动装配。
     通常的建议是：尽可能地使用自动配置的机制，显式配置越少越好。当你必须要显式配置bean的时候（比如，有些源码不是由你来维护的，而当你需要为这些代码配置bean的时候），推荐使用类型安全并且比XML更加强大的JavaConfig。最后，只有当你想要使用便利的XML命名空间，并且在JavaConfig中没有同样的实现时，才应该使用XML。
+6、如果没有其他配置的话，@ComponentScan默认会扫描与配置类相同的包（包括所有子包）。
+7、Spring自动扫描会将类名的第一个字母小写作为bean的ID，可通过给@Component注解传递值指定bean的ID。
+    JavaConfig配置默认情况下将带有@Bean注解的方法名作为bean的ID，可通过name属性指定bean的ID。
+8、Spring支持将@Named作为@Component注解的替代方案。两者之间有一些细微的差异，但是在大多数场景中，它们是可以互相替换的。
+    同样的，Spring支持使用@Inject注解替代@Autowired注解。
+9、默认情况下，Spring中的bean都是单例的。
+10、在Spring初始化bean之后，它会尽可能的去满足bean的依赖。如果没有匹配的bean，那么在应用上下文创建的时候，Spring会抛出一个异常。为了避免异常的出现，你可以将@Autowired的required属性设置为false。将required属性设置为false时，Spring会尝试执行自动装配，但是如果没有匹配的bean的话，Spring将会让这个bean处于未装配的状态。但是，把required属性设置为false时，你需要谨慎对待。如果在你的代码中没有进行null检查的话，这个处于未装配状态的属性有可能会出现NullPointerException。如果有多个bean都能满足依赖关系的话，Spring将会抛出一个异常，表明没有明确指定要选择哪个bean进行自动装配。
+11、@Autowired注解可以用在构造器上、属性的Setter方法上和直接用在属性上。
+12、混合配置的导入：
+    Java配置导入Java配置：@Import
+    Java配置导入xml配置：@ImportResource
+    xml配置导入xml配置：<import>
+    xml配置导入Java配置：<bean> （把配置类声明为bean）
