@@ -43,5 +43,18 @@
     读取并探查getResourceLoader()返回的ResourceLoader所加载的资源；
     借助getClassLoader()返回的ClassLoader加载并检查类是否存在。
 19、AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方法上还有什么其他的注解以及检查其他注解的属性。
-
-
+20、解决自动装配的歧义性：
+    可以通过@Primary将bean设为首选bean。@Primary能与@Component组合用在组件扫描上，也可以与@Bean组合用在Java配置中。在xml配置中，可以通过<bean>元素的primary属性来达到同样的目的。
+    使用限定符确定无歧义性的唯一bean。@Qualifier注解是使用限定符的主要方式，它可以与@Component或@Bean组合在配置时指定bean的限定符，并与@Autowired和@Inject注解组合使用在注入时指定注入bean的限定符。
+21、Spring定义了多种作用域，默认的作用域是单例：
+    单例（Singleton）：在整个应用中，只创建bean的一个实例。
+    原型（Prototype）：每次注入或者通过Spring应用上下文获取的时候，都会创建一个新的bean实例。
+    会话（Session）：在Web应用中，为每个会话创建一个bean实例。
+    请求（Rquest）：在Web应用中，为每个请求创建一个bean实例。
+22、@Scope的proxyMode属性解决将会话或请求作用域的bean注入到单例bean时所遇到的问题。Spring会注入一个bean代理进行懒解析并调用实际的bean方法。<aop:scoped-proxy>是与proxyMode属性功能相同的Spring XML配置元素。
+23、在Spring中，处理外部值的最简单方式就是声明属性源并通过Spring的Environment来检索属性。
+24、为了使用占位符，我们必须要配置一个PropertyPlaceholderConfigurer bean或PropertySourcesPlaceholderConfigurer bean。从Spring3.1开始，推荐使用PropertySourcesPlaceholderConfigurer，因为它能够基于Spring Environment及其属性源来解析占位符。
+    在Spring装配中，占位符的形式为使用 “${...}” 包装的属性名称。
+    在自动装配中，可以使用@Value注解实现相同的功能。
+25、SpEL表达式的形式为 “#{...}” 。
+    在SpEL表达式中，为了避免方法调用时出现NullPointerException，我们可以使用类型安全的运算符“?.”，这个运算符在访问它右边的内容之前，确保它所对应的元素不是null，否则表达式的返回值会是null。
