@@ -343,3 +343,53 @@
         使用进程、联网或事件处理CPU受限问题；
 
 38、在末尾添加&符号，将一个程序置入后台运行。该程序仍会运行，但不再侦听键盘。这种方法在Linux、macOS和Windows中都适用。
+39、Python处理文件数据存储的常用库：
+    CSV             标准csv模块
+    XML             xml.etree.ElementTree、xml.dom、xml.sax、defusedxml.ElementTree（安全的）
+    JSON            标准json模块
+    YAML            yaml
+    通用格式        tablib、pandas(*)
+
+    billion laughs attack是一种DoS（denial-of-service，拒绝服务）攻击，主要作用于XML文档解析器。它也被称为指数实体扩展攻击，是一种名副其实的XML炸弹。可以使用defusedxml库作为其他库的安全前端。
+    JSON与Python的紧密契合使其成为程序间数据交换的理想选择。
+    Python在尝试编码或解码包括datetime在内的某些对象时可能会产生异常，原因在于JSON标准并没有定义日期或时间类型，你得自己处理。可以将datetime转换为JSON能够理解的值，比如字符串或纪元值。
+        还有一种更简单的方法可以将datetime对象转换为JSON，default=str 告诉 json.dumps() 将转换函数 str() 应用于其不理解的数据类型。
+    PyYAML可以从字符串中加载Python对象，这很危险。如果要导入并不信任的YAML，可以使用safe_load()而不是load()。最好坚持使用safe_load()。
+40、Python处理关系数据库的常用库：
+    SQLite          sqlite3
+    MySQL           MySQLdb、mysql.connector、pymysql、oursql（需要MySQL C客户端库）
+    PostgreSQL      postgresql、psycopg2（需要PostgreSQL客户端工具pg_config）
+
+    DB-API是用于访问关系数据库的Python标准API。主要函数如下：
+        connect()       创建数据库连接
+        cursor()        创建cursor对象
+        execute()       运行SQL命令
+        executemany()   运行多条SQL命令
+        fetchone()      获取执行结果
+        fetchmany()     获取执行结果
+        fetchall()      获取执行结果
+
+    使用占位符是一种更安全的数据操作方法，可以有效避免遭受SQL注入攻击。
+    最流行的跨数据库Python库是SQLAlchemy。SQLAlchemy可以在3个层面操作数据库：
+        SQLAlchemy引擎，类似于DB-API函数，但也有连接池等优势；
+        SQLAlchemy表达式语言，能够方便处理SQL方言差异；
+        SQLAlchemy ORM，以Python对象方式操作数据库；
+    ORM是一种抽象概念，而所有的抽象概念都是有漏洞的，在某些时候会出问题。当ORM不能满足你的需求时，必须弄清楚其工作原理以及如何在SQL中修复。
+    其他常用关系数据库访问包还有：dataset和records。
+41、Python处理NoSQL数据库的常用库：
+    memcached       memcache
+    redis           redis
+    MongoDB         tools、mongodb
+    CouchDB         couchdb、couchdb-python
+    InfluxDB        influx-client
+    Neo4j           py2neo
+    Cassandra       pycassa
+    HBase           happybase
+    Lucene          pylucene
+    Solr            SolPython
+    ElasticSearch   elasticsearch
+
+    Redis数据类型：
+        具有单一值的键属于Redis字符串。简单的Python数据类型会被自动转换为字符串。
+        Redis列表只能包含字符串。列表是在首次插入数据时自动创建的。
+        Redis哈希类似于Python的字典，但其只能包含字符串。另外，它的深度只有一层，无法创建嵌套结构。
