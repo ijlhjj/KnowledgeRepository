@@ -393,3 +393,24 @@
         具有单一值的键属于Redis字符串。简单的Python数据类型会被自动转换为字符串。
         Redis列表只能包含字符串。列表是在首次插入数据时自动创建的。
         Redis哈希类似于Python的字典，但其只能包含字符串。另外，它的深度只有一层，无法创建嵌套结构。
+42、网络编程：网络编程的最底层会使用套接字。
+    TCP基于长连接，按发送顺序投递数据。如果出现问题，则会尝试重新发送。这使得TCP的速度略慢于UDP；
+    UDP在单个数据报中发送数据，但并不保证数据发送成功。如果通过UDP发送多个消息，则有可能不按顺序到达接收方，或者根本就到达不了。UDP速度快、轻量、无连接，但是并不可靠；
+    HTTP协议的前两个版本均基于TCP，HTTP3则基于QUIC协议，后者本身就使用UDP；
+
+    常用网络库：
+        ZeroMQ          zmq
+        RabbitMQ        pika
+
+    远程过程调用（RPC）常用的实现方式：
+        XML-RPC         标准xmlrpc模块
+        JSON-RPC        jsonrpcserver、jsonrpcclient
+        MessagePack-RPC     msgpackrpc（传输基于tornado）
+        zerorpc         zerorpc
+        gRPC            grpcio
+        twirp           twirp
+
+    ZeroMQ最值得留意的特性是可以通过在创建套接字时改变其连接类型来适应服务间、进程间、线程间的通信；
+    gRPC是 Web REST API 的顶层替代方案。它更适合于服务间通信，而REST更适合于公共API；
+
+43、Python提供了pickle模块来保存和恢复采用特殊二进制格式的对象。因为pickle能够创建Python对象，所以先前讨论过的相同的安全警告同样适用。不要使用pickle对不信任的东西反序列化。
