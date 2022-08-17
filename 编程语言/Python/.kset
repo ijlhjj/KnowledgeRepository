@@ -414,3 +414,42 @@
     gRPC是 Web REST API 的顶层替代方案。它更适合于服务间通信，而REST更适合于公共API；
 
 43、Python提供了pickle模块来保存和恢复采用特殊二进制格式的对象。因为pickle能够创建Python对象，所以先前讨论过的相同的安全警告同样适用。不要使用pickle对不信任的东西反序列化。
+44、Web开发:
+    WSGI（Web server gateway interface 服务器网关接口）是Python Web应用和Web服务器之间的通用接口；
+    ASGI（asynchronous server gateway interface 异步服务器网关接口）是与WSGI对应的异步方式；
+
+    Web服务器框架：
+        Apache Web
+        NGINX
+        uwsgi
+        cherrypy
+        pylons
+        tornado
+        gevent
+        gunicorn
+
+    0.0.0.0 表示任意IP地址，Web客户端可以使用服务器的任意地址来访问；
+    Apache Web服务器的最佳WSGI模块是mod_wsgi。它可以在apache进程中或是与Apache通信的单独进程中运行Python代码；
+    NGINX Web服务器没有内嵌的Python模块；
+
+    Web开发框架：
+        bottle
+        flask
+        django
+        fastapi
+        web2py
+        pyramid
+        turbogears
+        wheezy.web
+        molten
+        apistar
+        masonite
+        
+    在众多的Python Web框架中，Flask是我的最爱，它在易用性和丰富特性之间取得了平衡。Flask包括jinja2，这是一个功能更为丰富的模板系统；
+    Django是一款颇为流行的Python Web框架，尤其适合于大型站点；
+    webbrowser可以控制浏览器完成所有工作；
+
+    网络爬虫框架：
+        scrapy
+        BeautifulSoup
+        requests-html
