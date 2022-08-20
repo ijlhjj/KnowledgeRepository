@@ -13,6 +13,7 @@
     类和函数的命名要一致；按惯例，命名类用 UpperCamelCase，命名函数与方法用 lowercase_with_underscores。命名方法中第一个参数总是用 self 。
     编写用于国际多语环境的代码时，不要用生僻的编码。Python 默认的 UTF-8 或纯 ASCII 可以胜任各种情况。
     同理，就算多语阅读、维护代码的可能再小，也不要在标识符中使用非 ASCII 字符。
+    常量通常在模块级定义，并用大写字母书写，用下划线分隔单词。
 
     使用文档字符串：
         第一行应为对象用途的简短摘要；
@@ -45,6 +46,7 @@
     id()         对象标识
     locals()     局部名称空间对象
     globals()    全局名称空间对象
+    vars()       函数参数
 
 1、Python的特殊方法（魔术方法）：
     __eq__          ==
@@ -453,3 +455,59 @@
         scrapy
         BeautifulSoup
         requests-html
+
+45、pip常用命令：
+    安装包         pip install package
+        指定版本   pip install package==version
+    更新包         pip install --upgrade package
+    删除包         pip uninstall package
+
+    pipenv结合了pip和virtualenv，得到了PyPA（Python Packaging Authority —— Python打包机构）的推荐。
+46、虚拟环境只是一个包含Python解释器、其他程序和一些包的目录。虚拟环境可以通过运行其中bin目录内的shell脚本activate来激活。这会设置shell用于查找程序的环境变量$PATH。激活虚拟环境后，其bin目录被放在了$PATH所包含的常用目录之前。当你输入pip或python等命令时，shell首先找到的是虚拟环境中的相应程序，而不再是/bin、/usr/bin或/usr/local/bin等系统目录中的那些。
+47、常用IDE:
+    PyCharm
+    IPython
+    Jupyter Notebook
+    JupyterLab（Jupyter Notebook的替代者）
+48、Python变量只是引用实际对象的名称。对象有严格的类型，名称可以在任何时刻指向任何对象。
+49、代码优化：
+    代码检查器：
+        pylint
+        pyflakes
+        pep8
+    测试框架：
+        标准unittest包
+        标准doctest包
+        nose
+        tox
+        py.test
+        green
+    持续集成框架：
+        buildbot
+        jenkins         目前首选（Java编写）
+        travis-ci
+        circleci
+    调试：
+        使用print()打印日志
+        使用装饰器
+        使用pdb
+        使用breakpoint()
+
+        在调试的时候，通常都是“自底向上”，从最近做出的改动开始检查。
+        你觉得如果很多人使用的东西有问题，那么应该已经有人注意到了，但事实并非总是如此。
+        装饰器可以在不修改函数代码的前提下，在函数执行之前或之后调用代码。
+        在Python3.7中，有一个新的内建函数breakpoint()。如果将其添加到你的代码中，那么调试器会自动启动并在每个位置暂停。如果没有该函数，则必须手动启动调试器并设置断点。
+    日志：
+        Python标准日志模块是logging，它的默认日志级别是WARNING，可以使用basicConfig()设置日志级别。logging模块包含至少15个处理程序，可以将消息发送至电子邮件、Web服务器、屏幕、文件等地方。
+    性能优化：
+        使用标准模块 timeit.timeit() 可以测试一段代码的执行时间。
+        Cython是Python和C的混合体，旨在将带有一些性能注解的Python代码转换为经过编译的C代码。这些注解相当短，但能大大提高运行速度。
+        NumPy是一个使用C实现的数学库。
+        PyPy是一种新的Python解释器，在基准测试中平均比CPython快6倍以上。
+        Numba将Python代码动态编译成机器码，对于NumPy和其他有数学运算要求的包特别有用。
+    版本控制工具：
+        Mercurial
+        git
+    代码托管网站：
+        github
+        bitbucket
