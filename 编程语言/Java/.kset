@@ -1,6 +1,16 @@
+0、Java语言规范：
+    Java区分大小写；
+
+1、安装JDK注意事项:
+    安装路径最好不要包含空格；（比如Windows系统的默认安装路径“C:\Program Files\Java”就包含空格）
+    安装完成后添加PATH环境变量设置；（Windows和Linux系统需要，macOS不需要）
+    不要设置CLASSPATH环境变量！！！（这个环境变量只在一些老的JDK版本中才需要设置）
+    使用 javac --version 验证安装完成；（java有时不需要设置环境变量也可以执行，javac必须设置环境变量才能执行）
+
 1、Java并不只是一种语言，Java是一个完整的平台，有一个庞大的库，其中包含了很多可重用的代码，以及一个提供诸如安全性、跨操作系统的可移植性以及自动垃圾收集等服务的执行环境。
 2、Java“白皮书”的关键术语：
     Java“白皮书”：  https://www.oracle.com/java/technologies/language-environment.html
-	11个关键术语：  https://horstmann.com/corejava/java-an-overview/7Gosling.pdf
+    11个关键术语：  https://horstmann.com/corejava/java-an-overview/7Gosling.pdf
 3、模块是提供一个特定功能的自包含的代码单元。
 4、程序设计语言的成功更多地取决于其支撑系统的能力，而不是语法的精巧性。Java的成功源于其类库能够让人们轻松地完成原本有一定难度的事情。
+5、Java9引入的JShell程序提供了一个“读取——评估——打印 循环”（Read-Evaluate-Print Loop, REPL）。
