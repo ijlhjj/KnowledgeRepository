@@ -457,10 +457,13 @@
         requests-html
 
 45、pip常用命令：
-    安装包         pip install package
-        指定版本   pip install package==version
-    更新包         pip install --upgrade package
-    删除包         pip uninstall package
+    查看已安装包           pip list
+    安装包                 pip install package
+        指定版本           pip install package==version
+    更新包                 pip install --upgrade package
+    删除包                 pip uninstall package
+    导出依赖包             pip freeze > requirements.txt
+    安装依赖包             pip install -r requirements.txt
 
     pipenv结合了pip和virtualenv，得到了PyPA（Python Packaging Authority —— Python打包机构）的推荐。
 46、虚拟环境只是一个包含Python解释器、其他程序和一些包的目录。虚拟环境可以通过运行其中bin目录内的shell脚本activate来激活。这会设置shell用于查找程序的环境变量$PATH。激活虚拟环境后，其bin目录被放在了$PATH所包含的常用目录之前。当你输入pip或python等命令时，shell首先找到的是虚拟环境中的相应程序，而不再是/bin、/usr/bin或/usr/local/bin等系统目录中的那些。
@@ -511,3 +514,36 @@
     代码托管网站：
         github
         bitbucket
+
+50、Python图形库：
+    2D图形：
+        imghdr              标准库
+        colorsys            标准库
+        turtle              标准库
+        Pillow              PIL扩展
+        ImageMagick
+        Wand
+
+        尽管并未被纳入标准库，Python图像库（Python image library，PIL）也一直是Python中最有名的2D图像处理库。
+    3D图形：
+        VPython
+        pi3d
+        Open3D
+    3D动画：
+        Panda3D
+        VPython
+        Blender
+        Maya
+        Houdini
+    GUI库：
+        Tkinter
+        Qt
+        GTK+
+        WxPython
+        Kivy
+        PySimpleGUI
+        Web
+    数据可视化库：
+        Matplotlib
+        Seaborn
+        Bokeh
