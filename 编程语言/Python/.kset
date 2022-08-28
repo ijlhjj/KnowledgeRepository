@@ -547,3 +547,48 @@
         Matplotlib
         Seaborn
         Bokeh
+
+51、数据处理常用库：
+    文件格式识别：
+        python-magic
+    Microsoft Office格式：
+        docx
+        python-excel
+        oletools
+        pyUNO
+    PDF格式：
+        reportlab
+    数据处理：
+        pandas
+        numpy
+        ipython
+        bubble
+    数据验证：
+        validate_email
+        phonenumber
+        validators
+        pydantic
+        marshmallow
+        cerberus
+    开源Python企业包：
+        odoo            OpenERP
+        tryton
+        oscar           电子商务框架
+        grid studio     电子表格
+    地理数据：
+        geopandas
+        pyshp
+        kartograph
+        shapely
+        cartopy
+        folium
+        plotly
+        dash
+        fiona
+        mapnik
+        vincent
+        python for ArcGIS       Esri公司的ArcGIS
+        geomancer
+        peopy
+        pygeocoder
+        googlemaps
