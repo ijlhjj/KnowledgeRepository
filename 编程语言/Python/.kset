@@ -592,3 +592,17 @@
         peopy
         pygeocoder
         googlemaps
+
+52、科学计算：
+    math            数学函数
+    cmath           复数运算
+    decimal         金融计算（类似于Java的大数）
+    fractions       分数运算
+    array           一维数组
+    statistics      统计函数
+    @               矩阵乘法
+
+    Anaconda        用于科学计算的发行版
+    NumPy           数值运算包
+    SciPy           数学和统计函数包
+    Pandas          数据分析包
