@@ -339,6 +339,9 @@
     开发者习惯将程序中的耗时部分放入单独的线程或进程中运行；
     还有一种方法是基于事件编程。基于事件的程序会运行一个核心事件循环，分配任务，并重复该循环；
     gevent是一个基于事件的库，可以神奇地将你编写的命令式代码转换为协程。协程就像生成器，彼此之间可以通信，跟踪自己所处的位置。gevent修改了很多Python标准对象，从而使用自身机制取代了原有的阻塞方式。这不适用于使用C编写的Python扩展代码（比如某些数据库驱动）；
+    Python3.4添加了标准异步模块asyncio，Python3.5添加了关键字async和await；
+    可以通过将async放在def之前来定义协程；
+    协程比线程轻量的多，我们可以在仅支持数千个线程的机器上创建数十万个协程；
 
     对于Python，建议做到如下两点：
         使用线程处理I/O限定问题；
@@ -465,7 +468,6 @@
     导出依赖包             pip freeze > requirements.txt
     安装依赖包             pip install -r requirements.txt
 
-    pipenv结合了pip和virtualenv，得到了PyPA（Python Packaging Authority —— Python打包机构）的推荐。
 46、虚拟环境只是一个包含Python解释器、其他程序和一些包的目录。虚拟环境可以通过运行其中bin目录内的shell脚本activate来激活。这会设置shell用于查找程序的环境变量$PATH。激活虚拟环境后，其bin目录被放在了$PATH所包含的常用目录之前。当你输入pip或python等命令时，shell首先找到的是虚拟环境中的相应程序，而不再是/bin、/usr/bin或/usr/local/bin等系统目录中的那些。
 47、常用IDE:
     PyCharm
@@ -606,3 +608,18 @@
     NumPy           数值运算包
     SciPy           数学和统计函数包
     Pandas          数据分析包
+
+53、有两个工具对Python开发而言几乎是必不可少的：pip和virtualenv 。
+    pip是安装第三方（非标准）Python包最流行的方式；
+    pipenv结合了pip和virtualenv，得到了PyPA（Python Packaging Authority —— Python打包机构）的推荐；
+    最出类拔萃的打包方式还是conda，特别是对于科学和数据密集型应用；
+
+
+
+Python常用工具（包）：
+    pip
+    Anaconda
+    IPython
+    NumPy
+    pandas
+    SciPy
