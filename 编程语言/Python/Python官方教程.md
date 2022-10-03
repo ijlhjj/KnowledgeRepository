@@ -245,3 +245,96 @@
 4. 如果一个序列是另一个的初始子序列，则较短的序列可被视为较小（较少）的序列。
 5. 对于字符串来说，字典式顺序使用 Unicode 码位序号排序单个字符。
 6. 注意，对不同类型的对象来说，只要待比较的对象提供了合适的比较方法，就可以使用 < 和 > 进行比较。否则，解释器不会随便给出一个对比结果，而是触发 TypeError 异常。
+
+<br />
+
+# 6. 模块
+1. 模块是包含 Python 定义和语句的文件。其文件名是模块名加后缀名 .py
+2. 在模块内部，通过全局变量 `__name__` 可以获取模块名（即字符串）。
+## 6.1. 模块详解
+1. 模块包含可执行语句及函数定义。这些语句用于初始化模块，且仅在 import 语句 第一次 遇到模块名时执行。
+2. Each module has its own private namespace, which is used as the global namespace by all functions defined in the module. 
+3. Modules can import other modules. It is customary but not required to place all import statements at the beginning of a module (or script, for that matter). The imported module names, if placed at the top level of a module (outside any functions or classes), are added to the module's global namespace.
+4. There is a variant of the import statement that imports names from a module directly into the importing module's namespace. For example:
+    ```
+    from fibo import fib, fib2
+    ```
+    This does not introduce the module name from which the imports are taken in the local namespace (so in the example, fibo is not defined).
+5. 还有一种变体可以导入模块内定义的所有名称：
+    ```
+    from fibo import *
+    ```
+    这种方式会导入所有不以下划线（_）开头的名称。  
+    大多数情况下，不要用这个功能，这种方式向解释器导入了一批未知的名称，可能会覆盖已经定义的名称。
+6. 一般情况下，不建议从模块或包内导入 *， 因为，这项操作经常让代码变得难以理解。
+7. 模块名后使用 as 时，直接把 as 后的名称与导入模块绑定。
+    ```
+    import fibo as fib
+    ```
+    与 import fibo 一样，这种方式也可以有效地导入模块，唯一的区别是，导入的名称是 fib  
+    from 中也可以使用这种方式，效果类似：
+    ```
+    from fibo import fib as fibonacci
+    ```
+8. 为了保证运行效率，每次解释器会话只导入一次模块。如果更改了模块内容，必须重启解释器。仅交互测试一个模块时，也可以使用 importlib.reload()
+### 6.1.1. 以脚本方式执行模块
+1. Python 文件当脚本使用时，会把 `__name__` 赋值为 `"__main__"`
+2. 以下操作常用于为模块提供便捷的用户接口，导入模块时，不运行这些代码：
+    ```
+    if __name__ == "__main__":
+    ```
+### 6.1.2. 模块搜索路径
+1. 当一个名为 spam 的模块被导入时，解释器首先搜索具有该名称的内置模块。这些模块的名字被列在 sys.builtin_module_names 中。
+2. 如果没有找到，它就在变量 sys.path 给出的目录列表中搜索一个名为 spam.py 的文件， sys.path 从这些位置初始化:
+    ```
+    * 输入脚本的目录（或未指定文件时的当前目录）。
+    * PYTHONPATH （目录列表，与 shell 变量 PATH 的语法一样）。
+    * 依赖于安装的默认值（按照惯例包括一个 site-packages 目录，由 site 模块处理）。
+    ```
+3. 初始化后，Python 程序可以更改 sys.path
+4. 运行脚本的目录在标准库路径之前，置于搜索路径的开头。
+5. 即，加载的是该目录里的脚本，而不是标准库的同名模块。 除非刻意替换，否则会报错。
+### 6.1.3. “已编译的” Python 文件
+1. 为了快速加载模块，Python 把模块的编译版缓存在 `__pycache__` 目录中，文件名为 module.version.pyc，version 对编译文件格式进行编码，一般是 Python 的版本号。例如，CPython 的 3.3 发行版中，spam.py 的编译版本缓存为 `__pycache__/spam.cpython-33.pyc`。使用这种命名惯例，可以让不同 Python 发行版及不同版本的已编译模块共存。
+2. Python 对比编译版本与源码的修改日期，查看它是否已过期，是否要重新编译，此过程完全自动化。
+3. 编译模块与平台无关，因此，可在不同架构系统之间共享相同的支持库。
+4. Python 在两种情况下不检查缓存：其一，从命令行直接载入模块，只重新编译，不存储编译结果；其二，没有源模块，就不会检查缓存。为了支持无源文件（仅编译）发行版本， 编译模块必须在源目录下，并且绝不能有源模块。
+5. 给专业人士的一些小建议：
+    ```
+    * 在 Python 命令中使用 -O 或 -OO 开关，可以减小编译模块的大小。-O 去除断言语句，-OO 去除断言语句和 __doc__ 字符串。
+      有些程序可能依赖于这些内容，因此，没有十足的把握，不要使用这两个选项。“优化过的”模块带有 opt- 标签，并且文件通常会一小些。将来的发行版或许会改进优化的效果。
+    * 从 .pyc 文件读取的程序不比从 .py 读取的执行速度快，.pyc 文件只是加载速度更快。
+    * compileall 模块可以为一个目录下的所有模块创建 .pyc 文件。
+    * 本过程的细节及决策流程图，详见 PEP 3147
+    ```
+## 6.2. 标准模块
+1. 变量 sys.path 是字符串列表，用于确定解释器的模块搜索路径。该变量以环境变量 PYTHONPATH 提取的默认路径进行初始化，如未设置 PYTHONPATH，则使用内置的默认路径。
+2. 可以用标准列表操作修改该变量。
+## 6.3. dir() 函数
+1. 内置函数 dir() 用于查找模块定义的名称。
+2. 返回结果是经过排序的字符串列表。
+3. 没有参数时，dir() 列出当前定义的名称。
+4. 注意，该函数列出所有类型的名称：变量、模块、函数等。
+5. dir() 不会列出内置函数和变量的名称。这些内容的定义在标准模块 builtins 里：
+    ```
+    import builtins
+    dir(builtins) 
+    ```
+## 6.4. 包
+1. 包是一种用“点式模块名”构造 Python 模块命名空间的方法。例如，模块名 A.B 表示包 A 中名为 B 的子模块。正如模块可以区分不同模块之间的全局变量名称一样，点式模块名可以区分 NumPy 或 Pillow 等不同多模块包之间的模块名称。
+2. 导入包时，Python 搜索 sys.path 里的目录，查找包的子目录。
+3. Python 只把含 `__init__.py` 文件的目录当成包。这样可以防止以 string 等通用名称命名的目录，无意中屏蔽出现在后方模块搜索路径中的有效模块。 最简情况下，`__init__.py` 只是一个空文件，但该文件也可以执行包的初始化代码，或设置 `__all__` 变量。
+4. 使用 from package import item 时，item 可以是包的子模块（或子包），也可以是包中定义的函数、类或变量等其他名称。import 语句首先测试包中是否定义了 item。如果未在包中定义，则假定 item 是模块，并尝试加载。如果找不到 item，则触发 ImportError 异常。
+5. 使用 import item.subitem.subsubitem 句法时，除最后一项外，每个 item 都必须是包。最后一项可以是模块或包，但不能是上一项中定义的类、函数或变量。
+### 6.4.1. 从包中导入 *
+1. 使用 from sound.effects import * 时会发生什么？理想情况下，该语句在文件系统查找并导入包的所有子模块。这项操作花费的时间较长，并且导入子模块可能会产生不必要的副作用，这种副作用只有在显式导入子模块时才会发生。
+2. 唯一的解决方案是提供包的显式索引。import 语句使用如下惯例：如果包的 `__init__.py` 代码定义了列表 `__all__`，运行 from package import * 时，它就是用于导入的模块名列表。发布包的新版本时，包的作者应更新此列表。如果包的作者认为没有必要在包中执行导入 * 操作，也可以不提供此列表。
+3. 如果没有定义 `__all__`，from sound.effects import * 语句 不会 把包 sound.effects 中所有子模块都导入到当前命名空间。该语句只确保导入包 sound.effects （可能还会运行 `__init__.py` 中的初始化代码），然后，再导入包中定义的名称。这些名称包括 `__init__.py` 中定义的任何名称（以及显式加载的子模块），还包括之前 import 语句显式加载的包里的子模块。
+4. 虽然，可以把模块设计为用 import * 时只导出遵循指定模式的名称，但仍不提倡在生产代码中使用这种做法。
+5. 记住，使用 from package import specific_submodule 没有任何问题！ 实际上，除了导入模块使用不同包的同名子模块之外，这种方式是推荐用法。
+### 6.4.2. 子包参考
+1. 包中含有多个子包时（与示例中的 sound 包一样），可以使用绝对导入引用兄弟包中的子模块。还可以用 import 语句的 from module import name 形式执行相对导入。这些导入语句使用前导句点表示相对导入中的当前包和父包。
+2. 注意，相对导入基于当前模块名。因为主模块名是 `"__main__"` ，所以 Python 程序的主模块必须始终使用绝对导入。
+### 6.4.3. 多目录中的包
+1. 包支持一个更特殊的属性 `__path__` 。在包的 :`file:__init__.py` 文件中的代码被执行前，该属性被初始化为包含 :`file:__init__.py` 文件所在的目录名在内的列表。可以修改此变量；但这样做会影响在此包中搜索子模块和子包。
+2. 这个功能虽然不常用，但可用于扩展包中的模块集。
