@@ -799,3 +799,29 @@
     Decimal 可以模拟手工运算来避免当二进制浮点数无法精确表示十进制数时会导致的问题。
 3. 精确表示特性使得 Decimal 类能够执行对于二进制浮点数来说不适用的模运算和相等性检测。
 4. decimal 模块提供了运算所需要的足够精度。
+
+<br />
+
+# 12. 虚拟环境和包
+## 12.2. 创建虚拟环境
+1. 用于创建和管理虚拟环境的模块称为 venv。venv 通常会安装你可用的最新版本的 Python
+2. 如果您的系统上有多个版本的 Python，您可以通过运行 python3 或您想要的任何版本来选择特定的Python版本。
+3. 要创建虚拟环境，请确定要放置它的目录，并将 venv 模块作为脚本运行目录路径:
+    ```
+    python3 -m venv tutorial-env
+    ```
+    这将创建 tutorial-env 目录，如果它不存在的话，并在其中创建包含 Python 解释器副本和各种支持文件的目录。
+4. 虚拟环境的常用目录位置是 .venv  
+    这个名称通常会令该目录在你的终端中保持隐藏，从而避免需要对所在目录进行额外解释的一般名称。  
+    它还能防止与某些工具所支持的 .env 环境变量定义文件发生冲突。
+5. 创建虚拟环境后，您可以激活它。
+    ``` 
+    在Windows上，运行:
+        tutorial-env\Scripts\activate.bat
+    在Unix或MacOS上，运行:
+        source tutorial-env/bin/activate
+6. 激活虚拟环境将改变你所用终端的提示符，以显示你正在使用的虚拟环境，并修改环境以使 python 命令所运行的将是已安装的特定 Python 版本。
+## 12.3. 使用pip管理包
+1. 你可以使用一个名为 pip 的程序来安装、升级和移除软件包。  
+    默认情况下 pip 将从 Python Package Index `<https://pypi.org>` 安装软件包。  
+    你可以在你的 web 浏览器中查看 Python Package Index

@@ -465,6 +465,7 @@
         指定版本           pip install package==version
     更新包                 pip install --upgrade package
     删除包                 pip uninstall package
+    显示包信息             pip show
     导出依赖包             pip freeze > requirements.txt
     安装依赖包             pip install -r requirements.txt
 
