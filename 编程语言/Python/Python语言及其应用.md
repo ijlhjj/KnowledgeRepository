@@ -133,3 +133,10 @@
     ljust()         左对齐              str.ljust(width[, fillchar])
     rjust()         右对齐              str.rjust(width[, fillchar])
     ```
+
+<br />
+
+# 第 6 章  while循环和for循环
+1. 如果循环正常结束而没有执行break语句，则会执行可选的else子句。
+2. Python频繁地用到迭代器，这是有充分理由的。迭代器允许你遍历数据结构，无须知道其具体大小和实现。你甚至可以一边创建一边迭代数据，借此处理无法一次性全部读入计算机内存的数据流。
+3. range()函数可用于生成数字序列：range(start, stop, step=1)
