@@ -47,7 +47,7 @@
 2. 整数就是既没有分数也没有小数点的数字。    
     可以使用下划线(_)作为数位分隔符；  
     截断式整数除法(//)会返回整数，丢弃小数部分；  
-    如果除数为0，则任何一种除法运算都会产生Python异常；
+    如果除数为0，则任何一种除法运算都会产生Python异常；  
     在Python3中，int类型可以是任意大小；
 3. 0b 或 0B 表示二进制  
     0o 或 0O 表示八进制  
@@ -57,7 +57,7 @@
 
 # 第 4 章  if语句
 1. Python 使用空白字符来定义程序结构的做法并不常见。
-2. Python 使用 # 字符标记注释，从 # 开始到当前行结束的部分都属于注释。
+2. Python 使用 # 字符标记注释，从 # 开始到当前行结束的部分都属于注释。  
     Python 没有多行注释。你需要明确地在每一行注释前加上 #
 3. 可以使用续行字符 \ （反斜线）表明后续内容仍在同一行，只需要把 \ 放在行尾。
 4. if语句在Python中不需要圆括号。
@@ -65,3 +65,71 @@
 6. Python允许执行连续比较： 5 < x < 10
 7. 对于字典，in 查看的是键而不是值。
 8. 海象运算符（:=）也称赋值表达式，是Python3.8新引入的，可在表达式内部为变量赋值。
+
+<br />
+
+# 第 5 章  字符串
+1. 字符串就是字符序列。  
+    Python中的字符串是不可变的；  
+    单引号或双引号都可以创建字符串，三引号可以创建多行字符串；  
+    可以在双引号字符串中加入单引号，或是在单引号字符串中加入双引号；
+2. Python 特殊类型字符串：
+    ```
+    f或F：格式化字符串  
+    r或R：原始字符串            其中的转义序列不会被解释  
+    u或U：Unicode字符串  
+    b或B：类型 bytes 的实例
+    ```
+3. 如果三引号中有不止一行代码，那么换行符就会被保留在字符串内。如果有前导空格或尾随空格，则换行符同样会被保留。  
+    疑问：是换行符同样会被保留吗，不应该是前导空格或尾随空格被保留吗？
+4. 当你对非字符串对象调用 print() 以及格式化字符串时，Python会在内部使用 str() 函数。
+5. 原始字符串不会去掉任何真实的（非'\n'）换行符。
+6. 在拼接字符串时，Python不会替你添加空格，所以先前的一些例子需要明确添加空格。  
+    Python会在 print() 函数的参数之间添加空格并在行尾加上换行符。
+7. 可以使用 * 运算符重复某个字符串。
+8. 可以使用 [] 获取字符，索引越界会报错。
+9. 可以使用分片从字符串中提取子串。  
+    [start : end : step]  
+    切片包含start，但不包含end  
+    步长值为负数可以实现反向提取分片  
+    字符串没有reverse()函数，可以使用切片实现这个功能：str[ : : -1]  
+    比字符串起始位置还靠前的偏移被视为 0 ，超出结束位置的偏移被视为 -1  （此处指结束位置，实际不是-1）
+10. 字符串格式化：
+    ```
+    旧样式：format_str % data
+        字符串内 % 的数量要和数据项数量相同
+        多个数据项时必须使用元组形式  
+        可以使用特定的格式说明符
+    新样式：format_str.format(data)
+        参数顺序和占位符 {} 保持一致
+        可以按位置或名称指定参数
+        可以使用字典指定参数
+        可以使用特定的格式说明符
+    最新样式： f'format_str'    Python3.6以上
+        {} 内可以使用表达式和方法调用
+        Python3.8 加入了一种快捷写法方便调试
+    ```
+11. 常用函数：
+    ```
+    len()           获取长度            len(str)
+    split()         分割为列表          str.split(sep=None, maxsplit=- 1)       sep 默认为任意空白字符序列（换行符、空格和制表符）
+    join()          合并字符串          str.join(iterable)
+    replace()       替换子串            str.replace(old, new[, count])          count 默认替换所有
+    strip()         删除两侧字符        str.strip([chars])                      chars 默认移除空白符
+    lstrip()        删除左侧字符        str.lstrip([chars])
+    rstrip()        删除右侧字符        str.rstrip([chars])
+    startswith()    以指定字符串开头    str.startswith(prefix[, start[, end]])
+    endswith()      以指定字符串结尾    str.endswith(suffix[, start[, end]])
+    find() / rfind()    查找子字符串索引    str.find(sub[, start[, end]])       未找到返回 -1
+    index() / rindex()  同 find()           str.index(sub[, start[, end]])      未找到抛出异常
+    count()         统计出现次数        str.count(sub[, start[, end]])
+    isalnum()       都是字母或数字      str.isalnum()
+    capitalize()    首字母大写          str.capitalize()
+    title()         每个单词首字母大写  str.title()
+    upper()         全部转为大写        str.upper()
+    lower()         全部转为小写        str.lower()
+    swapcase()      大小写转换          str.swapcase()
+    center()        居中对齐            str.center(width[, fillchar])
+    ljust()         左对齐              str.ljust(width[, fillchar])
+    rjust()         右对齐              str.rjust(width[, fillchar])
+    ```
