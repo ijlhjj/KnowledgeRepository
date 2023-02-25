@@ -109,7 +109,7 @@
         {} 内可以使用表达式和方法调用
         Python3.8 加入了一种快捷写法方便调试
     ```
-11. 常用函数：
+11. 字符串常用函数：
     ```
     len()           获取长度            len(str)
     split()         分割为列表          str.split(sep=None, maxsplit=- 1)       sep 默认为任意空白字符序列（换行符、空格和制表符）
@@ -140,3 +140,70 @@
 1. 如果循环正常结束而没有执行break语句，则会执行可选的else子句。
 2. Python频繁地用到迭代器，这是有充分理由的。迭代器允许你遍历数据结构，无须知道其具体大小和实现。你甚至可以一边创建一边迭代数据，借此处理无法一次性全部读入计算机内存的数据流。
 3. range()函数可用于生成数字序列：range(start, stop, step=1)
+
+<br />
+
+# 第 7 章  元组和列表
+1. 元组和列表可以包含不同类型的元素，但一般情况下，各个元素的类型相同。每个元素可以是任意的Python对象。
+2. 元组是 immutable（不可变的），列表是 mutable （可变的）。
+3. 元组和列表操作：  
+    使用 + 拼接；  
+    使用 * 复制元素；  
+    使用比较运算符比较大小；  
+    使用 for...in 迭代元素；
+4. 创建元组：
+    ```
+    * empty_tuple = ()
+    * one_ele = 'one',             #单个元素时逗号是必须的
+      one_ele = ('one',)
+    * eles_tuple = 'one', 'two', 'three'
+      eles_tuple = ('one', 'two', 'three')
+    * tuple(list)
+    ```
+5. 元组解包：
+    ```
+    * a, b, c = eles_tuple
+    * a, b = b, a                   #交换两个变量的值
+    ```
+6. 元组的优点：  
+    元组占用空间少；  
+    不会误破坏元组项；  
+    可作为字典键；  
+    具名元组可替代简单对象；
+7. 列表元素的值可重复，列表对象会保持其成员的顺序。
+8. 创建列表：
+    ```
+    * empty_list = []
+      empty_list = list()
+    * eles_list = ['one', 'two', 'three']
+    * eles_list = list(iterable)
+    * eles_list = [expression for item in iterable]
+    ```
+9. 可以使用 [offset] 获取列表元素，索引越界会报错。
+10. 可以使用切片获取子列表： [start : end : step]  
+11. 列表有reverse()函数：list.reverse() ，但也可以使用切片实现这个功能：list[ : : -1]
+12. 可以使用索引修改列表项，使用切片修改子列表：  
+    list[i] = e  
+    list[start : end] = iterable
+13. 可以使用copy()、list()或切片复制列表（浅复制）。  
+    deepcopy()能够处理深嵌套列表、字典以及其他对象（深复制）。
+14. 使用zip()函数可以并行迭代多个序列，当最短的序列被处理完后，zip()就会停止。
+15. zip()返回的可迭代序列可转换为list或dict：  
+    转换为列表：list(zip(iterable, iterable))  
+    转换为字典：dict(zip(iterable, iterable))
+16. 列表常用函数：
+    ```
+    del                 删除元素                del list[i]
+    in                  包含测试                e in list
+    len()               获取长度                len(list)
+    append()            添加元素                list.append(e)
+    insert()            插入元素                list.insert(i, e)           #在 i 索引位置插入 e 。0 会在起始位置插入，大于 len 会在尾部添加
+    extend()            扩展列表                list.extend(iterable)
+    remove()            删除第一个匹配项        list.remove(e)
+    pop()               删除并返回列表项        list.pop(i)                 # i 默认为 -1，删除最后一项
+    clear()             清空列表                list.clear()
+    index()             查找索引                list.index(e)               # 返回第一个匹配项的索引，没有找到抛出异常
+    count()             统计出现次数            list.count(e)
+    sort()              就地排序                sort(list, key=None, reverse=False)
+    sorted()            返回排序副本            list.sorted(key=None, reverse=False)
+    ```
