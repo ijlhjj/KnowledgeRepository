@@ -207,3 +207,69 @@
     sort()              就地排序                sort(list, key=None, reverse=False)
     sorted()            返回排序副本            list.sorted(key=None, reverse=False)
     ```
+
+<br />
+
+# 第 8 章  字典和集合
+1. 字典（也称关联数组或哈希表）的键可以是任意的不可变类型。
+2. 创建字典：
+    ```
+    * empty_dict = {}
+      empty_dict = dict()
+    * eles_dict = {'a':1, 'b':2, 'c':3}
+      eles_dict = dict(a=1, b=2, c=3)
+    * eles_dict = dict([['a',1], ['b',2], ['c',3]])         # dict()可以将双值序列转换为字典
+    * eles_dict = {key : value for item in iterable}
+    ```
+3. 字典的键必须是唯一的。在给字典项赋值时，不存在的键会添加新值，已存在的键将用新值替代旧值。 
+4. 使用 d[key] 获取字典项，key不存在时会抛出异常。使用 d.get(key[, default]) 获取字典项，default默认为None
+5. 从Python3.5开始，可以使用 {**a, **b} 合并字典（独角闪光兽）（浅复制合并）。
+6. 可以使用 == 和 != 比较字典。其他比较运算符不适用于字典。
+7. 字典常用函数：
+    ```
+    del                 删除元素                del d[key]
+    len()               获取长度                len(d)
+    keys()              获取所有键              d.keys()                # 返回可迭代视图，可以使用 list(d.keys()) 转换为列表
+    values()            获取所有值              d.values()
+    items()             获取所有项              d.items()
+    update()            合并字典                d.update([other])
+    pop()               移除并返回项            d.pop(key[, default])   # default 未给出且 key 不存在于字典中，则会引发异常
+    clear()             移除所有元素            d.clear()
+    copy()              返回原字典的浅拷贝      d.copy()
+    deepcopy()          深拷贝                  copy.deepcopy(d)        # deepcopy() 是 copy 模块的函数
+    ```
+8. 集合是无序的。
+9. 创建集合：
+    ```
+    * empty_set = set()         # {} 创建的是空字典
+    * eles_set = {'a', 'b', 'c'}
+    * eles_set = set(iterable)
+    * eles_set = {value for item in iterable}
+    ```
+10. 集合操作：
+    ```
+    * 交集：    a & b
+                a.intersection(b)
+    * 并集：    a | b
+                a.union(b)
+    * 差集：    a - b
+                a.difference(b)
+    * 异或集：  a ^ b
+                a.symmetric_difference(b)
+    * 子集：    a <= b
+                a.issubset(b)
+    * 真子集：  a < b
+    * 超集：    a >= b
+                a.issuperset(b)
+    * 真超集：  a > b
+    ```
+11. 可以使用 frozenset([iterable]) 创建不可变集合。
+12. 字典和集合操作：  
+    使用 for...in 迭代元素；  
+    使用 in 测试是否包含；
+13. 集合常用函数：
+    ```
+    len()               获取长度                len(s)
+    add()               添加元素                s.add(elem)
+    remove()            移除元素                s.remove(elem)
+    ```
