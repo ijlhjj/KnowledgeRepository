@@ -8,3 +8,10 @@
     bitstring               pip install bitstring
     construct               pip install construct
     hachoir                 pip install hachoir
+
+3、日期时间工具包：
+    arrow                   pip install arrow
+    python-dateutil         pip install python-dateutil
+    iso8601                 pip install iso8601
+    fleming                 pip install fleming
+    maya                    pip install maya
