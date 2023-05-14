@@ -457,3 +457,64 @@
     random.sample() 函数一次性获取多个值。  
     要想获取任意区间内的整数，可以将 choice() 或 sample() 配合 range() 使用，也可以使用 randint() 或 randrange()  
     random() 函数可以获取 0.0 和 1.0 之间的随机实数（浮点数）。
+
+<br />
+
+# 第 12 章  数据处理
+1. 数据格式粗略地分为两类：文本和二进制。  
+    Python字符串用于文本数据。
+2. Unicode字符串：
+    ```
+    * Python3的字符串是Unicode字符序列，而非字节数组。这是Python2到Python3最大的变化。
+    * 如果知道某个字符的Unicode ID或名称，就可以在Python字符串中使用该字符。
+        \u 后面可以跟上4个十六进制数字，指定Unicode基本多语言平面中的某个字符；
+        对于更高平面内的字符，需要使用更多的位数。可以使用Python转义序列 \U （大写） 后面跟上 8 个十六进制数字，高位必须写作 0
+        可以使用 \N{name} 按照标准名称指定任意字符。
+    * Python能处理所有的Unicode字符，唯一可能碰到的问题是用于显示文本的字体。
+        几乎没有哪种字体能够涵盖所有的Unicode字符，当缺失对应字符时，会以占位符的形式显示。
+    * Unicode Character Name Index 页面列出了字符的名称。
+        字符名称经过了重新格式化，以使其能够更美观地排列显示。要想获得真实的Unicode名称，只需删除逗号，将其之后的内容移到最前面即可。
+    * 字符串函数len()统计的是Unicode字符数，而非字节数。
+    * 如果知道Unicode字符的编码值，就可以使用标准函数ord()和chr()在整数编码值和单个Unicode字符之间快速转换。
+    * 在进行正常的字符串处理时，不用关心Python是如何存储每个Unicode字符的。
+        但是，当你与外部交换数据时，需要知道两件事：将字符串编码为字节；将字节解码为字符串。
+    * Python3.4引入了另一种转换Unicode字符的方法：使用HTML字符实体。
+    ```
+3. UTF-8是Python、Linux和HTML的标准文本编码。这种编码速度快、完备且效果良好。  
+    UTF-8 是一种变长编码。可以将任何文本编码为UTF-8，尽可能使用UTF-8编码。  
+    如果你是通过从别的文本源复制粘贴的方式来创建Python字符串，那么一定要确保文本源使用的是UTF-8编码。将其他编码的文本复制进python字符串的错误屡见不鲜，这会造成后续的无效字节序列异常。  
+    从外部数据源获得的文本都会被编码为字节序列形式。只要知道采用的是哪种编码，就可以倒推出Unicode字符串。
+4. 字符串相关函数：
+    ```
+    * str.encode(encoding='utf-8', errors='strict')       将字符串编码为字节序列
+    * bytes.decode(encoding='utf-8', errors='strict')     将字节序列解码为Unicode字符串
+    * unicodedata.normalize(form, unistr)                 返回 Unicode字符串的规范化形式
+    * unicodedata.lookup(name)                            接受字符名称（不区分大小写），返回对应的Unicode字符
+    * unicodedata.name(chr[, default])                    接受Unicode字符，返回对应的字符名称（大写形式）
+    ```
+5. 正则表达式模式匹配由标准模块re提供：
+    ```
+    * 因为这是一个常见的Python陷阱，所以我再重申一次：match()仅匹配源字符串开头的模式。search()匹配源字符串中任意位置的模式。
+    * 这里的大部分正则表达式使用的是ASCII字符，但是Python的字符串函数（包括正则表达式）能够处理任意的Python字符串和Unicode字符。
+        正则表达式并不局限于匹配ASCII字符。\d 能够匹配Unicode中的任何数字字符，而不仅仅是ASCII字符 '0' 到 '9'
+    * 字符 ^ 和 $ 被称为锚点： ^ 将搜索锚定在字符串起始，$ 将搜索锚定在字符串结尾。
+    * Python有一些特殊的转义序列。例如，\b 代表退格，但在正则表达式中，\b 代表单词边界。
+        为了避免这种歧义，在定义正则表达式字符串时，可以使用Python的原始字符串。只要把 r 字符放在正则表达式字符串之前，Python就会禁用转义序列。
+    * 在使用 match() 或 search() 时，结果对象 m 中的所有匹配以 m.group() 返回。
+        如果将模式放入圆括号内，对应的匹配会被保存在单独的分组中，由其组成的元组可以通过 m.groups() 获得。
+6. 正则表达式相关函数：
+    ```
+    * re.match(pattern, string, flags=0)                只在字符串的开头检查匹配项
+    * re.search(pattern, string, flags=0)               检查字符串中的任何位置是否匹配
+    * re.fullmatch(pattern, string, flags=0)            检查整个字符串是否匹配
+    * re.findall(pattern, string, flags=0)              返回 pattern 在 string 中的所有非重叠匹配，以字符串列表或字符串元组列表的形式
+    * re.split(pattern, string, maxsplit=0, flags=0)    用 pattern 分开 string
+    * re.sub(pattern, repl, string, count=0, flags=0)   返回通过使用 repl 替换在 string 最左边非重叠出现的 pattern 而获得的字符串
+    ```
+7. Python3引入了两种类型的8位整数序列：  
+    * bytes是不可变的，类似于字节元组；  
+    * bytearray是可变的，类似于字节列表。
+8. 标准库有一个struct模块，可以处理类似于C和C++中结构体形式的数据。通过struct，你可以在二进制数据和Python数据结构之间任意转换。
+9. 二进制数据处理需要注意大小端和格式说明符。
+10. 标准模块binascii提供了在二进制数据和各种字符串描述（十六进制、BASE64、Unicode等）之间的转换的函数。
+11. Python提供了类似于C语言中的位运算符。

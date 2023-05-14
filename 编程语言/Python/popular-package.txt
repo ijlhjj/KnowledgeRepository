@@ -1,5 +1,10 @@
 1、Python常用工具包：
-    numpy               科学计算                pip install numpy
-    scipy               科学计算                pip install scipy
-    pandas              数据分析                pip install pandas
-    requests            HTTP 库                 pip install requests
+    numpy                   pip install numpy                   科学计算
+    scipy                   pip install scipy                   科学计算
+    pandas                  pip install pandas                  数据分析
+    requests                pip install requests                HTTP 库
+
+2、二进制工具包：
+    bitstring               pip install bitstring
+    construct               pip install construct
+    hachoir                 pip install hachoir
