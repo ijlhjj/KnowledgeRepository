@@ -15,3 +15,26 @@
     iso8601                 pip install iso8601
     fleming                 pip install fleming
     maya                    pip install maya
+
+4、命令行工具包：
+    invoke                  pip install invoke                  任务执行库，管理面向shell的子流程
+    fabric2                 pip install fabric2                 通过SSH远程执行shell命令
+    click                   pip install click                   可组合的命令行界面工具包
+    doit                    pip install doit                    自动化工具包
+    sh                      pip install sh                      子流程替换
+    pypeln                  pip install pypeln                  创建并发数据管道
+
+5、事件驱动网络框架：
+    gevent                  pip install gevent                  基于协程的网络库
+    tornado                 pip install tornado                 Web框架和异步网络库
+    Twisted                 pip install Twisted                 异步网络框架
+
+6、任务队列：
+    celery                  pip install celery                  分布式任务队列
+    rq                      pip install rq                      创建和处理后台作业
+    queues                  pip install queues                  用于与轻量级队列服务交互的最低通用API
+
+
+
+99、其他：
+    psutil                  pip install psutil                  跨平台的获取进程和系统信息包
