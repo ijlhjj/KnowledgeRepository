@@ -43,6 +43,33 @@
     dataset                 pip install dataset                 数据库访问工具包
     records                 pip install records                 对关系数据库进行原始SQL查询
 
+9、网络数据侦听分析：
+    scapy                   pip install scapy                   交互式数据包操作工具
+    netcat                  pip install netcat                  网络端口连接侦听包
+
+10、数据序列化：
+    dill                    pip install dill
+    msgpack                 pip install msgpack
+    avro                    pip install avro
+    Serialize               pip install Serialize               支持多种序列化格式的通用API
+    marshmallow             pip install marshmallow
+
+11、远程调用RPC：
+    thrift                  pip install thrift                  Apache Thrift RPC 的Python实现
+    jsonrpcserver           pip install jsonrpcserver           JSON-RPC服务端
+    jsonrpcclient           pip install jsonrpcclient           JSON-RPC客户端
+    rpc-msgpack             pip install rpc-msgpack             RPC with MessagePack
+    grpcio                  pip install grpcio                  基于HTTP的RPC框架
+    grpcio-tools            pip install grpcio-tools            gRPC的Protobuf代码生成器
+    twirp                   pip install twirp
+
+12、远程管理工具：
+    salt                    pip install salt                    远程执行和配置管理系统
+    ansible                 pip install ansible                 简单的IT自动化系统
+    fabric2                 pip install fabric2                 高级SSH命令执行
+
 
 99、其他：
     psutil                  pip install psutil                  跨平台的获取进程和系统信息包
+    pydantic                pip install pydantic                使用python类型提示进行数据验证和设置管理
+    dask                    pip install dask                    用于分析的并行计算库
