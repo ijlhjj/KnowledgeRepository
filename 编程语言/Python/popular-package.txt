@@ -4,6 +4,7 @@
     pandas                  pip install pandas                  数据分析
     requests                pip install requests                HTTP 库
     SQLAlchemy              pip install SQLAlchemy              数据库抽象包
+    Scrapy                  pip install Scrapy                  网络爬虫
 
 2、二进制工具包：
     bitstring               pip install bitstring
@@ -68,8 +69,28 @@
     ansible                 pip install ansible                 简单的IT自动化系统
     fabric2                 pip install fabric2                 高级SSH命令执行
 
+13、Web服务器：
+    bottle                  pip install bottle                  适用于小型Web应用程序框架
+    Flask                   pip install Flask                   轻量级WSGI Web应用程序框架
+    Django                  pip install Django                  适用于大型站点的高级Python Web框架
+    uWSGI                   pip install uWSGI
+    CherryPy                pip install CherryPy
+    fastapi                 pip install fastapi
+    py4web                  pip install py4web
+    pyramid                 pip install pyramid
+    masonite                pip install masonite
+    Jinja2                  pip install Jinja2                  模板引擎
+
+14、网络爬虫：
+    beautifulsoup4          pip install beautifulsoup4          从网页中抓取信息
+    requests-html2          pip install requests-html2          HTML解析库
+
 
 99、其他：
     psutil                  pip install psutil                  跨平台的获取进程和系统信息包
     pydantic                pip install pydantic                使用python类型提示进行数据验证和设置管理
     dask                    pip install dask                    用于分析的并行计算库
+    httpie                  pip install httpie                  命令行HTTP客户端
+    connexion               pip install connexion               根据YAML格式描述的API规范自动处理HTTP请求
+    datasette               pip install datasette               用于探索和发布数据的工具集
+    flask-openapi3          pip install flask-openapi3          为Flask项目生成REST API和OpenAPI文档

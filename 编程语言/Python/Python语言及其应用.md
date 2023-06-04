@@ -810,3 +810,29 @@
 10. 远程过程调用（remote procedure call，RPC）看起来就像普通的函数，但是在网络上的远程机器中执行的。  
     标准库中包含了一种使用XML作为交换格式的RPC实现：xmlrpc  
     gRPC是Web REST API的顶层替代方案。它似乎比REST更适合于服务间的通信，而REST可能更适合于公共API
+
+## 第 18 章  Web
+
+1. Web是一种客户端–服务器系统。  
+    客户端向服务器发出请求：打开TCP/IP连接，通过HTTP发送URL和其他信息，接收响应。  
+    HTTP是用于Web数据交换的标准协议。  
+    HTTP的一个重要方面是其无状态性。HTTP连接之间相互独立。  
+    解决无状态的方法包括cookie，其中服务器向客户端发送足够的特定信息，以便在客户端发回cookie时能够唯一地识别它。
+2. telnet允许你连接任意服务器和端口，向在其中运行的服务输入命令。如果需要安全（加密）连接，则可以使用ssh代替。
+3. 80端口通常是未经加密的http，加密的https使用端口443
+4. http.server模块只适合进行测试，不适合在生产环境中使用。
+5. Web服务器网关接口（Web server gateway interface，WSGI）的定义促成了Python Web开发的飞跃，WSGI是Python Web应用和Web服务器之间的通用接口。  
+    ASGI（asynchronous server gateway interface，异步服务器网关接口）是使用异步特性的WSGI的对应物。
+6. Apache Web服务器的最佳WSGI模块是mod_wsgi。它可以在apache进程中或是与Apache通信的单独进程中运行Python代码。
+7. NGINX Web服务器没有内嵌的Python模块。  
+    它是独立的WSGI服务器（比如uWSGI或gUnicorn）的前端。两者共同为Python Web开发提供了一个快速的可配置平台。
+8. 在众多的Python Web框架中，Flask是我的最爱，它在易用性和丰富特性之间取得了平衡。  
+    flask包括werkzeug WSGI库和jinja2模板库。  
+    在调用run()时，将debug设置为True，如果服务器代码出现异常，那么Flask就会返回一个特殊格式的页面，其中包含详细的出错信息。  
+    更妙的是，还可以输入一些命令来查看服务器程序中变量的值。  
+    不要在生产环境的Web服务器中设置debug=True。这会向潜在的入侵者暴露过多有关服务器的信息。  
+    可以使用字典的 `**` 操作符来向模板一次性传入字典中的多个值。
+9. webbrowser可以控制浏览器完成所有工作。
+10. 如果已经有了网站的HTML数据，只想从中提取数据，那么BeautifulSoup是一个不错的选择。  
+    HTML解析远比听起来要难，因为很多公共页面的HTML在技术上是不合法的：未闭合的标签、不正确的嵌套结构以及其他各种问题。
+11. 大部分Web API要求你先获得API密钥，并在每次访问API时提供该密钥。为什么呢？这就是一场公地悲剧（tragedy of the commons）：可以匿名访问的免费资源经常被过度使用或滥用。这就是为什么我们无法拥有美好的事物。
