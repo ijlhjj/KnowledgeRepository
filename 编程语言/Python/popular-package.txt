@@ -42,6 +42,11 @@
 7、格式文件处理：
     tablib                  pip install tablib                  格式无关的表格数据库（XLS、JSON、YAML、CSV等）
     tiledb                  pip install tiledb                  TileDB阵列存储管理器接口
+    docx-hitalent           pip install docx-hitalent           创建和更新Microsoft Word（.docx）文件
+    python4excel            pip install python4excel            处理Excel文件
+    oletools                pip install oletools                用于分析MS Office和OLE文件
+    python-magic            pip install python-magic            文件类型识别
+    reportlab               pip install reportlab               生成PDF和图形的开源Python库
 
 8、数据库包：
     dataset                 pip install dataset                 数据库访问工具包
@@ -111,6 +116,21 @@
     matplotlib              pip install matplotlib
     seaborn                 pip install seaborn
     bokeh                   pip install bokeh
+
+20、数据验证：
+    email-validate          pip install email-validate          电子邮件验证器
+    phonenumbers            pip install phonenumbers            解析、格式化、存储和验证国际电话号码
+    validators              pip install validators              面向人类的Python数据验证
+    pydantic                pip install pydantic                使用Python类型提示进行数据验证和设置管理
+    Cerberus                pip install Cerberus                用于Python字典的轻量级、可扩展的模式和数据验证工具
+
+21、地图相关：
+    pyshp                   pip install pyshp                   对ESRI Shapefile格式的读/写支持
+    geopandas               pip install geopandas               为pandas对象添加地理数据支持
+    shapely                 pip install shapely                 几何对象的操作和分析
+    Fiona                   pip install Fiona                   将简单的要素数据流式传输到GIS格式
+    pyproj                  pip install pyproj                  Python interface to PROJ
+    geopy                   pip install geopy                   几个流行的地理编码Web服务的Python客户端
 
 
 99、其他：
