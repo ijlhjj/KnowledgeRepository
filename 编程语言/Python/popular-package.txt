@@ -5,6 +5,8 @@
     requests                pip install requests                HTTP 库
     SQLAlchemy              pip install SQLAlchemy              数据库抽象包
     Scrapy                  pip install Scrapy                  网络爬虫
+    pipenv                  pip install pipenv                  Python虚拟环境管理工具
+    pylint                  pip install pylint                  Python代码静态检查器
 
 2、二进制工具包：
     bitstring               pip install bitstring
@@ -85,6 +87,15 @@
     beautifulsoup4          pip install beautifulsoup4          从网页中抓取信息
     requests-html2          pip install requests-html2          HTML解析库
 
+15、单元测试：
+    nose2                   pip install nose2
+    tox                     pip install tox
+    green                   pip install green
+
+16、持续集成：
+    buildbot                pip install buildbot
+    travis-ci-cd            pip install travis-ci-cd
+
 
 99、其他：
     psutil                  pip install psutil                  跨平台的获取进程和系统信息包
@@ -94,3 +105,4 @@
     connexion               pip install connexion               根据YAML格式描述的API规范自动处理HTTP请求
     datasette               pip install datasette               用于探索和发布数据的工具集
     flask-openapi3          pip install flask-openapi3          为Flask项目生成REST API和OpenAPI文档
+    pyflakes                pip install pyflakes                Python代码检查器
