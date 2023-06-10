@@ -7,6 +7,7 @@
     Scrapy                  pip install Scrapy                  网络爬虫
     pipenv                  pip install pipenv                  Python虚拟环境管理工具
     pylint                  pip install pylint                  Python代码静态检查器
+    Pillow                  pip install Pillow                  Python图像库
 
 2、二进制工具包：
     bitstring               pip install bitstring
@@ -95,6 +96,21 @@
 16、持续集成：
     buildbot                pip install buildbot
     travis-ci-cd            pip install travis-ci-cd
+
+17、图像处理：
+    Wand                    pip install Wand
+    vpython                 pip install vpython                 3D动画库
+    pi3d                    pip install pi3d                    3D图形库
+
+18、GUI库：
+    PySide6                 pip install PySide6                 Qt的Python绑定
+    PyQt6                   pip install PyQt6                   Qt的Python绑定
+    wxPython                pip install wxPython                wxWidgets的Python绑定
+
+19、数据可视化：
+    matplotlib              pip install matplotlib
+    seaborn                 pip install seaborn
+    bokeh                   pip install bokeh
 
 
 99、其他：
