@@ -51,6 +51,9 @@
 8、数据库包：
     dataset                 pip install dataset                 数据库访问工具包
     records                 pip install records                 对关系数据库进行原始SQL查询
+    aiomysql                pip install aiomysql                异步MySQL驱动程序
+    aioredis                pip install aioredis                异步redis支持库
+    asyncpg                 pip install asyncpg                 异步PostgreSQL驱动程序
 
 9、网络数据侦听分析：
     scapy                   pip install scapy                   交互式数据包操作工具
@@ -88,6 +91,15 @@
     pyramid                 pip install pyramid
     masonite                pip install masonite
     Jinja2                  pip install Jinja2                  模板引擎
+    hypercorn               pip install hypercorn               基于Hyper库并受Gunicorn启发的ASGI服务器
+    sanic                   pip install sanic                   为快速运行而编写的Web服务器和Web框架
+    uvicorn                 pip install uvicorn                 快速的ASGI服务器
+    aiohttp                 pip install aiohttp                 异步http客户端/服务器框架
+    blacksheep              pip install blacksheep              异步的快速Web框架
+    channels                pip install channels                为Django 3.2及更高版本带来异步、事件驱动的功能
+    muffin                  pip install muffin                  快速、简单的异步Web框架
+    quart                   pip install quart                   与Flask具有相同API的ASGI Web微框架
+    starlette               pip install starlette               轻量级的异步ASGI框架/工具包
 
 14、网络爬虫：
     beautifulsoup4          pip install beautifulsoup4          从网页中抓取信息
@@ -132,6 +144,12 @@
     pyproj                  pip install pyproj                  Python interface to PROJ
     geopy                   pip install geopy                   几个流行的地理编码Web服务的Python客户端
 
+22、并发：
+    curio                   pip install curio                   用于并发系统编程的基于协程的库
+    trio                    pip install trio                    用于异步并发和I/O的Python库
+    asks                    pip install asks                    用于curio、trio和asyncio的异步http库
+    anyio                   pip install anyio                   异步网络和并发库
+
 
 99、其他：
     psutil                  pip install psutil                  跨平台的获取进程和系统信息包
@@ -142,3 +160,4 @@
     datasette               pip install datasette               用于探索和发布数据的工具集
     flask-openapi3          pip install flask-openapi3          为Flask项目生成REST API和OpenAPI文档
     pyflakes                pip install pyflakes                Python代码检查器
+    poetry                  pip install poetry                  依赖关系管理和打包工具
