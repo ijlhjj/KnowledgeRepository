@@ -1,0 +1,20 @@
+1、<stdio.h> 标准输入和输出库
+    EOF                     标识文件结束的负整数
+
+    int printf(const char *format, ...)                     发送格式化输出到标准输出 stdout
+
+2、<limits.h> 各变量类型的取值限制
+    CHAR_MIN                char 最小值
+    CHAR_MAX                char 最大值
+    SHRT_MIN                short 最小值
+    SHRT_MAX                short 最大值
+    INT_MIN                 int 最小值
+    INT_MAX                 int 最大值
+    LONG_MIN                long 最小值
+    LONG_MAX                long 最大值
+
+3、<float.h> 平台相关的浮点值常量
+    FLT_MIN                 float 最小值
+    FLT_MAX                 float 最大值
+    DBL_MIN                 double 最小值
+    DBL_MAX                 double 最大值
