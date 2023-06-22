@@ -41,3 +41,4 @@
     size_t                  无符号整数类型，sizeof 关键字的结果
 
     int rand(void)                                          返回一个范围在 0 到 RAND_MAX 之间的伪随机数
+    double atof(const char *str)                            把参数 str 所指向的字符串转换为一个浮点数
