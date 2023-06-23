@@ -3,36 +3,7 @@
 
     int printf(const char *format, ...)                     发送格式化输出到标准输出 stdout
 
-2、<limits.h> 各变量类型的取值限制
-    CHAR_MIN                char 最小值
-    CHAR_MAX                char 最大值
-    SHRT_MIN                short 最小值
-    SHRT_MAX                short 最大值
-    INT_MIN                 int 最小值
-    INT_MAX                 int 最大值
-    LONG_MIN                long 最小值
-    LONG_MAX                long 最大值
-
-3、<float.h> 平台相关的浮点值常量
-    FLT_MIN                 float 最小值
-    FLT_MAX                 float 最大值
-    DBL_MIN                 double 最小值
-    DBL_MAX                 double 最大值
-
-4、<string.h> 操作字符数组的函数
-    NULL                    空指针常量值
-
-    size_t                  无符号整数类型，sizeof 关键字的结果
-
-    size_t strlen(const char *str)                          计算字符串 str 的长度，直到空结束字符，但不包括空结束字符
-
-5、<ctype.h> 测试和映射字符的函数
-
-    int islower(int c)                                      字符是否是小写字母
-    int tolower(int c)                                      把大写字母转换为小写字母
-    int isdigit(int c)                                      字符是否是十进制数字
-
-6、<stdlib.h> 通用工具函数
+2、<stdlib.h> 通用工具函数
     NULL                    空指针常量值
     EXIT_FAILURE            exit 函数失败时要返回的值
     EXIT_SUCCESS            exit 函数成功时要返回的值
@@ -42,3 +13,44 @@
 
     int rand(void)                                          返回一个范围在 0 到 RAND_MAX 之间的伪随机数
     double atof(const char *str)                            把参数 str 所指向的字符串转换为一个浮点数
+
+3、<stddef.h> 定义各种变量类型和宏。这些定义中的大部分也出现在其它头文件中。
+    NULL                    空指针常量值
+
+    ptrdiff_t               有符号整数类型，两个指针相减的结果
+
+11、<limits.h> 各变量类型的取值限制
+    CHAR_MIN                char 最小值
+    CHAR_MAX                char 最大值
+    SHRT_MIN                short 最小值
+    SHRT_MAX                short 最大值
+    INT_MIN                 int 最小值
+    INT_MAX                 int 最大值
+    LONG_MIN                long 最小值
+    LONG_MAX                long 最大值
+
+12、<float.h> 平台相关的浮点值常量
+    FLT_MIN                 float 最小值
+    FLT_MAX                 float 最大值
+    DBL_MIN                 double 最小值
+    DBL_MAX                 double 最大值
+
+13、<string.h> 操作字符数组的函数
+    NULL                    空指针常量值
+
+    size_t                  无符号整数类型，sizeof 关键字的结果
+
+    size_t strlen(const char *str)                                  计算字符串 str 的长度，直到空结束字符，但不包括空结束字符
+    char *strcpy(char *dest, const char *src)                       把 src 所指向的字符串复制到 dest
+    char *strncpy(char *dest, const char *src, size_t n)            把 src 所指向的字符串复制到 dest，最多复制 n 个字符
+    int strcmp(const char *str1, const char *str2)                  把 str1 所指向的字符串和 str2 所指向的字符串进行比较
+    int strncmp(const char *str1, const char *str2, size_t n)       把 str1 和 str2 进行比较，最多比较前 n 个字节
+    char *strcat(char *dest, const char *src)                       把 src 所指向的字符串追加到 dest 所指向的字符串的结尾
+    char *strncat(char *dest, const char *src, size_t n)            把 src 所指向的字符串追加到 dest 所指向的字符串的结尾，直到 n 字符长度为止
+    char *strstr(const char *haystack, const char *needle)          在字符串 haystack 中查找第一次出现字符串 needle（不包含空结束字符）的位置
+
+14、<ctype.h> 测试和映射字符的函数
+
+    int islower(int c)                                      字符是否是小写字母
+    int tolower(int c)                                      把大写字母转换为小写字母
+    int isdigit(int c)                                      字符是否是十进制数字
