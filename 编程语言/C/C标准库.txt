@@ -13,11 +13,16 @@
 
     int rand(void)                                          返回一个范围在 0 到 RAND_MAX 之间的伪随机数
     double atof(const char *str)                            把参数 str 所指向的字符串转换为一个浮点数
+    void *calloc(size_t nitems, size_t size)                分配所需的内存空间，并返回一个指向它的指针
+    void *malloc(size_t size)                               分配所需的内存空间，并返回一个指向它的指针
+    void *realloc(void *ptr, size_t size)                   尝试重新调整之前调用 malloc 或 calloc 所分配的 ptr 所指向的内存块的大小
+    void free(void *ptr)                                    释放之前调用 calloc、malloc 或 realloc 所分配的内存空间
 
 3、<stddef.h> 定义各种变量类型和宏。这些定义中的大部分也出现在其它头文件中。
     NULL                    空指针常量值
 
     ptrdiff_t               有符号整数类型，两个指针相减的结果
+    size_t                  无符号整数类型，sizeof 关键字的结果
 
 11、<limits.h> 各变量类型的取值限制
     CHAR_MIN                char 最小值
@@ -51,6 +56,9 @@
 
 14、<ctype.h> 测试和映射字符的函数
 
-    int islower(int c)                                      字符是否是小写字母
-    int tolower(int c)                                      把大写字母转换为小写字母
-    int isdigit(int c)                                      字符是否是十进制数字
+    int islower(int c)              字符是否是小写字母
+    int tolower(int c)              把大写字母转换为小写字母
+    int isdigit(int c)              字符是否是十进制数字
+    int isspace(int c)              字符是否是空白字符
+    int isalpha(int c)              字符是否是字母
+    int isalnum(int c)              字符是否是字母和数字
