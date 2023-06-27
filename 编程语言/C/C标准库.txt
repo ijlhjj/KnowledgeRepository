@@ -1,7 +1,32 @@
 1、<stdio.h> 标准输入和输出库
     EOF                     标识文件结束的负整数
+    stdin                   标准输入
+    stdout                  标准输出
+    stderr                  标准错误
+
+    FILE                    文件流信息对象类型
 
     int printf(const char *format, ...)                     发送格式化输出到标准输出 stdout
+    int sprintf(char *str, const char *format, ...)         发送格式化输出到字符串
+    int getchar(void)                                       从标准输入 stdin 获取一个字符（一个无符号字符）
+    int putchar(int char)                                   把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中
+    int scanf(const char *format, ...)                      从标准输入 stdin 读取格式化输入
+    int sscanf(const char *str, const char *format, ...)    从字符串读取格式化输入
+    FILE *fopen(const char *filename, const char *mode)     使用给定的模式 mode 打开 filename 所指向的文件
+    int fclose(FILE *stream)                                关闭流 stream。刷新所有的缓冲区
+    int getc(FILE *stream)                                  从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动
+    int fgetc(FILE *stream)                                 从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动
+    int putc(int char, FILE *stream)                        把参数 char 指定的字符（一个无符号字符）写入到指定的流 stream 中，并把位置标识符往前移动
+    int fputc(int char, FILE *stream)                       把参数 char 指定的字符（一个无符号字符）写入到指定的流 stream 中，并把位置标识符往前移动
+    int fscanf(FILE *stream, const char *format, ...)       从流 stream 读取格式化输入
+    int fprintf(FILE *stream, const char *format, ...)      发送格式化输出到流 stream 中
+    int ferror(FILE *stream)                                测试给定流 stream 的错误标识符
+    int feof(FILE *stream)                                  测试给定流 stream 的文件结束标识符
+    char *fgets(char *str, int n, FILE *stream)             从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定
+    int fputs(const char *str, FILE *stream)                把字符串写入到指定的流 stream 中，但不包括空字符
+    char *gets(char *str)                                   从标准输入 stdin 读取一行，并把它存储在 str 所指向的字符串中。当读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定
+    int puts(const char *str)                               把一个字符串写入到标准输出 stdout，直到空字符，但不包括空字符。换行符会被追加到输出中
+    int ungetc(int char, FILE *stream)                      把字符 char（一个无符号字符）推入到指定的流 stream 中，以便它是下一个被读取到的字符
 
 2、<stdlib.h> 通用工具函数
     NULL                    空指针常量值
@@ -11,18 +36,32 @@
 
     size_t                  无符号整数类型，sizeof 关键字的结果
 
+    void srand(unsigned int seed)                           设置由函数 rand 使用的随机数发生器
     int rand(void)                                          返回一个范围在 0 到 RAND_MAX 之间的伪随机数
     double atof(const char *str)                            把参数 str 所指向的字符串转换为一个浮点数
     void *calloc(size_t nitems, size_t size)                分配所需的内存空间，并返回一个指向它的指针
     void *malloc(size_t size)                               分配所需的内存空间，并返回一个指向它的指针
     void *realloc(void *ptr, size_t size)                   尝试重新调整之前调用 malloc 或 calloc 所分配的 ptr 所指向的内存块的大小
     void free(void *ptr)                                    释放之前调用 calloc、malloc 或 realloc 所分配的内存空间
+    void exit(int status)                                   使程序正常终止
+    int system(const char *string)                          由 string 指定的命令传给要被命令处理器执行的主机环境
+    char *getenv(const char *name)                          搜索 name 所指向的环境字符串，并返回相关的值给字符串
+
+    void *bsearch(const void *key, const void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *))             执行二分查找
+    void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*))                                        数组快速排序
 
 3、<stddef.h> 定义各种变量类型和宏。这些定义中的大部分也出现在其它头文件中。
     NULL                    空指针常量值
 
     ptrdiff_t               有符号整数类型，两个指针相减的结果
     size_t                  无符号整数类型，sizeof 关键字的结果
+
+4、<stdarg.h> 可变参数的函数工具类
+    va_list                 适用于 va_start()、va_arg() 和 va_end() 这三个宏存储信息的类型
+
+    void va_start(va_list ap, last_arg)                     初始化 ap 变量。last_arg 是最后一个传递给函数的已知的固定参数，即省略号之前的参数
+    type va_arg(va_list ap, type)                           检索函数参数列表中类型为 type 的下一个参数
+    void va_end(va_list ap)                                 允许使用了 va_start 宏的带有可变参数的函数返回。如果在从函数返回之前没有调用 va_end，则结果为未定义
 
 11、<limits.h> 各变量类型的取值限制
     CHAR_MIN                char 最小值
@@ -46,19 +85,23 @@
     size_t                  无符号整数类型，sizeof 关键字的结果
 
     size_t strlen(const char *str)                                  计算字符串 str 的长度，直到空结束字符，但不包括空结束字符
+    char *strstr(const char *haystack, const char *needle)          在字符串 haystack 中查找第一次出现字符串 needle（不包含空结束字符）的位置
     char *strcpy(char *dest, const char *src)                       把 src 所指向的字符串复制到 dest
     char *strncpy(char *dest, const char *src, size_t n)            把 src 所指向的字符串复制到 dest，最多复制 n 个字符
     int strcmp(const char *str1, const char *str2)                  把 str1 所指向的字符串和 str2 所指向的字符串进行比较
     int strncmp(const char *str1, const char *str2, size_t n)       把 str1 和 str2 进行比较，最多比较前 n 个字节
     char *strcat(char *dest, const char *src)                       把 src 所指向的字符串追加到 dest 所指向的字符串的结尾
     char *strncat(char *dest, const char *src, size_t n)            把 src 所指向的字符串追加到 dest 所指向的字符串的结尾，直到 n 字符长度为止
-    char *strstr(const char *haystack, const char *needle)          在字符串 haystack 中查找第一次出现字符串 needle（不包含空结束字符）的位置
+    char *strchr(const char *str, int c)                            在参数 str 所指向的字符串中搜索第一次出现字符 c（一个无符号字符）的位置
+    char *strrchr(const char *str, int c)                           在参数 str 所指向的字符串中搜索最后一次出现字符 c（一个无符号字符）的位置
 
 14、<ctype.h> 测试和映射字符的函数
 
     int islower(int c)              字符是否是小写字母
-    int tolower(int c)              把大写字母转换为小写字母
+    int isupper(int c)              字符是否是大写字母
     int isdigit(int c)              字符是否是十进制数字
     int isspace(int c)              字符是否是空白字符
     int isalpha(int c)              字符是否是字母
     int isalnum(int c)              字符是否是字母和数字
+    int tolower(int c)              把大写字母转换为小写字母
+    int toupper(int c)              把小写字母转换为大写字母
