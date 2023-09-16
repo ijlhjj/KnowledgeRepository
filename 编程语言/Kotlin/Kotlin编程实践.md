@@ -98,3 +98,31 @@
     该函数必须将调用它自己作为最后一步操作；  
     不能在 try/catch/finally 块中使用 tailrec  
     尾递归仅在 JVM 后端支持（新版本已支持其他平台）。
+
+## 第 5 章 集合
+
+1. Kotlin 提供了一个名为 arrayOf 的简单工厂方法来创建数组，尽管它使用相同的语法访问元素，但在 Kotlin 中 Array 却是一个类。
+2. Array 类中仅有一个公共构造函数，它接收两个参数：
+
+    ```text
+        * Int 类型的 size
+        * 一个类型为 (Int)->T 的 lambda 表达式 init
+    ```
+
+    在创建数组时，会在每个索引上调用该 lambda 表达式。
+3. 虽然 Kotlin 没有显式地指明原生类型，但当值可为空时，生成的字节码也会使用 Java 包装类，如果不为空，则使用原生类型。
+4. 使用 listOf 、 setOf 、 mapOf 可以产生不可变集合；使用 mutableListOf 、 mutableSetOf 、 mutableMapOf 可以产生可变集合。
+5. 使用 toList 、 toSet 、 toMap 方法可以创建只读集合，将可变集合赋予 List 、 Set 、 Map 类型的变量可以创建只读视图。
+6. associate 和 associateWith 函数可以将 Set 转化为 Map
+7. 当集合为空或字符串为空时，使用 ifEmpty 和 ifBlank 函数可以返回默认值。
+8. 使用 coerceIn 函数可以将变量限制在给定区间。小于最小值返回最小值，大于最大值返回最大值。
+9. 如果要将集合切分为相同的部分，则使用 chunked 函数；如果希望将块沿集合滑动给定间隔的块，则使用 windowed 函数。  
+    chunked 函数与 windowed 函数对于分阶段处理时序数据很有用。
+10. 解构是通过将对象的值分配给变量的集合来从中提取值的过程。
+11. sortedWith 函数和 compareBy 函数组合可以实现多字段排序。  
+    sortBy 和 sortWith 函数对元素在集合内进行排序，因此需要可变的集合。
+12. 在 Java 中， for-each 循环可以迭代实现 Iterable 的任何类。在 Kotlin 中， for-in 循环可以运行相似的约束。
+13. filterIsInstance 函数使用了实化类型，因此生成的集合属于已知类型，并且你无须在使用其属性之前检查类型。
+14. 在 Kotlin 中使用双点操作符可以创建一个区间，例如 1..5 ，这将创建一个 IntRange 。 Kotlin 中的区间都是闭区间，即包含两个端点。
+15. 可以基于实现 Comparable 的任何类来创建区间，并且已经有支持该区间的基础结构。  
+    使用双点操作符创建一个区间，该区间支持使用 forEachIndexed 函数进行迭代。
