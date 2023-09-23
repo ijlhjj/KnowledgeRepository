@@ -156,3 +156,8 @@
 4. inline 关键字将告知编译器避免仅仅为了调用这个函数而创建一个完整的新对象，而是将实际的源代码替换到调用处。
 5. Kotlin 映射实现了成为委托所必需的 getValue 与 setValue 函数。所以可以使用映射实现类的属性委托。
 6. 可以通过实现 ReadOnlyProperty 或 ReadWriteProperty 接口来实现自己的属性委托。
+
+## 第 9 章 测试
+
+1. Kotlin 没有 static 关键字，需要使用伴生对象实现类似 Java 的一些静态行为。
+2. JUnit 5 允许使用 @TestInstance 指定测试类的生命周期，默认值为 PER_METHOD
