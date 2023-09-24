@@ -161,3 +161,9 @@
 
 1. Kotlin 没有 static 关键字，需要使用伴生对象实现类似 Java 的一些静态行为。
 2. JUnit 5 允许使用 @TestInstance 指定测试类的生命周期，默认值为 PER_METHOD
+
+## 第 10 章 输入 / 输出
+
+1. Kotlin 不支持 try-with-resources 语法，Kotlin 将扩展函数 use 添加到了 Closeable 上，并将 useLines 添加到了 Reader 与 File 上。
+2. use 块是 Execute Around Method 设计模式的一个示例，该基础结构代码已内置到库中，一个提供的 lambda 表达式用于完成实际工作。
+3. writeText 与 appendText 函数将实现委托给了 writeBytes 与 appendBytes，它们都利用 use 函数来确保写入完成后关闭文件。
