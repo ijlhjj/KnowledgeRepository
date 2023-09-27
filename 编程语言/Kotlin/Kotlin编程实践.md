@@ -167,3 +167,20 @@
 1. Kotlin 不支持 try-with-resources 语法，Kotlin 将扩展函数 use 添加到了 Closeable 上，并将 useLines 添加到了 Reader 与 File 上。
 2. use 块是 Execute Around Method 设计模式的一个示例，该基础结构代码已内置到库中，一个提供的 lambda 表达式用于完成实际工作。
 3. writeText 与 appendText 函数将实现委托给了 writeBytes 与 appendBytes，它们都利用 use 函数来确保写入完成后关闭文件。
+
+## 第 11 章 其他
+
+1. 可以使用 KotlinVersion.CURRENT 获取当前使用的 kotlin 版本号。
+2. 可以使用标准库中的 repeat 函数重复执行一个 lambda 表达式（ (Int) -> Unit 类型的函数 ）。
+3. kotlin 的 when 语句类似于 Java 的 switch 语句，但它不需要在每个子句中使用 break
+4. String 类的 replace 函数要实现正则表达式替换效果需要先使用 toRegex 函数进行转换。
+5. Int 类可以使用扩展函数 toString 转换为二进制字符串。String 类的 toInt 函数执行相反操作。
+6. 通过提供 invoke 操作符函数，可以通过在引用后添加括号来直接执行实例。
+7. kotlin.system 包的 measureTimeMillis 和 measureNanoTime 函数可以用来测量代码的执行时间。
+8. kotlin.concurrent.thread 函数可以创建并启动线程。  
+    使用 isDaemon 参数可以创建守护线程；  
+    调用 join 方法可以使所有线程按顺序执行。
+9. 使用 TODO 函数可以标记当前未实现的功能。
+10. 给定相同的因子，Random.nextInt 将获得相同的随机数序列。
+11. Kotlin 中的所有异常均被视为非受检异常，这意味着编译器不会要求你处理它们。  
+    可以使用 @Throws 注解解决与 Java 的集成问题。
