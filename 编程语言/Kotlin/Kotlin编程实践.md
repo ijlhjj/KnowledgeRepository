@@ -192,3 +192,22 @@
 2. no-arg 编译器插件向 Kotlin 类添加了一个合成的默认构造函数，这意味着它不能在 Java 或 Kotlin 中调用，但是 Spring 可以使用反射来调用它。
 3. 如果在 Spring 管理的 bean 中只有一个构造函数，Spring 将自动注入所有参数。
 4. 可以在 JUnit 5 测试中使用非默认构造函数。
+
+## 第 13 章 协程与结构化并发
+
+1. runBlocking 是一个顶层函数，而 launch 与 async 是 CoroutineScope 类型上的扩展函数。  
+    如果你需要启动协程以执行单独的任务，但又不需要从中取得返回值，可以使用 launch 构建器。  
+    在需要返回值的常见情况下，使用 async 构建器。  
+    CoroutineContext 用于与其他协程共享状态。  
+    coroutineScope 函数是一个挂起函数，它会等待所有包含的协程执行完毕后才退出。它的优点是不阻塞主线程（与 runBlocking 不同），但是必须将其作为挂起函数的一部分来调用。  
+    coroutineScope 的好处在于，不必轮询即可查看协程是否执行完毕，它会自动等待所有子协程执行完毕。  
+    在 coroutineScope 内运行所有协程以确保如果一个失败，所有协程将被取消的惯例称为结构化并发。
+2. 在实践中，从 coroutineScope 开始以建立所包含的协程的作用域，在代码块内部，你可以使用 launch 或 async 来处理各个任务。然后，该作用域将等待所有协程执行完毕，然后退出，并且如果任何协程失败，还将取消其他协程。这样就可以在控制和错误处理之间实现很好的平衡，而不必轮询以查看协程是否已经执行完毕，并且可以防止协程失败时发生内存泄漏。
+3. 在实践中，可以使用 withContext 替换在 async 调用后立即调用 await 的代码。
+4. Dispatchers.Default 调度器使用一个普通的可共享的后台线程池。它适合消耗大量计算资源的协程。  
+    Dispatchers.IO 调度器使用按需创建的共享线程池，用于运行 I/O 密集型的阻塞任务，例如文件 I/O 或阻塞式的网络 I/O  
+    Android 还包含一个 Dispatchers.Main 的调度器。
+5. Android 通常建议在 Android KTX 库的 viewModelScope 函数上启动协程。
+6. 使用 use 函数，在代码块结束时，将关闭调度器，同时还将关闭基础线程池。
+7. 使用 withTimeout 函数在执行超时时抛出 TimeoutCancellationException  
+    使用 withTimeoutOrNull 在超时时返回 null
