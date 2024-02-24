@@ -173,3 +173,12 @@
         javax.crypto.spec.
             SecretKeySpec
     ```
+
+## 第 4 章  他山之石，可以攻玉
+
+1. Bouncy Castle是一款开源组件，提供了一系列算法支持实现，并可以跻身于JCE框架之下，以提供者的方式纳入其中。
+2. Commons Codec是Apache旗下的一款开源软件，它并未对Java提供扩展加密算法，仅仅是对Java提供的API做了扩展，提供了更加易用的API。  
+    Commons Codec主要用于编码格式的转换，如Base64、二进制、十六进制、字符集和Url编码的转换。
+3. 需要注意的一点是，Bouncy Castle和Commons Codec对于Url Base64算法的理解上有所不同。  
+    关于Url Base64算法，本身没有一个统一的标准，没有像RFC 2045这样的明文规定。
+4. DigestUtils类是一个工具类，它提供了MD5和SHA系列消息摘要算法的实现。
