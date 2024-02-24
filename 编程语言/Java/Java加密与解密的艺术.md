@@ -67,3 +67,109 @@
 15. 相比PKI，PGP根本不需要HTTPS，也不需要CA，仅需要一个可信赖的密钥托管服务器（基于LDAP的服务器）。  
     PGP依赖于非公钥体制，用公钥对数据加密，用私钥对加密后的数据解密，黑客却无法通过公钥破解密文。  
     而我们已知的PKI，是通过非公钥体制进行对称密钥交换，转而使用对称密钥完成加密操作。
+
+## 第 3 章  Java加密利器
+
+1. JCA和JCE是Java平台提供的用于安全和加密服务的两组API。它们并不执行任何算法，它们只是连接应用和实际算法实现程序的一组接口。
+2. Provider类覆盖Properties类方法的目的在于确保程序有足够的权限执行相应的操作。这方面涉及安全管理器的概念（SecurityManager）。
+3. Security类的任务是管理Java程序中所用到的提供者类。  
+    这里有一个优先使用的问题，也就是说位置与优先级成正比，提供者位置越靠前，优先级越高。
+4. MessageDigest类实现了消息摘要算法，是Java安全提供者体系结构中最为简单的一个引擎类。
+5. Key接口是所有密钥接口的顶层接口，一切与加密解密有关的操作都离不开Key接口。  
+    SecretKey（javax.crypto.SecretKey）接口是对称密钥顶层接口。  
+    PublicKey、PrivateKey接口是非对称密钥顶层接口。
+6. AlgorithmParameters类是一个引擎类，它提供密码参数的不透明表示。  
+    AlgorithmParameters对象只能被初始化一次，无法重用。  
+    当使用Java提供的加密组件时，很少会用到AlgorithmParameters和AlgorithmParameterGenerator两个类，当对算法参数要求极为严格的情况下才会考虑使用这种方式。
+7. KeyPair类是对非对称密钥的扩展，它是密钥对的载体，我们把它称为密钥对。
+8. KeyPairGenerator类提供了非对称密钥对的生成实现，如果要生成私钥，则可使用KeyGenerator（javax.crypto.KeyGenerator）类。  
+    参数 int keysize 用来控制密钥长度，单位为位。
+9. KeyFactory类也是用来生成密钥（公钥和私钥）的引擎类，我们将它称为密钥工厂，它用来生成公钥/私钥，或者说它的作用是通过密钥规范还原密钥。  
+    与KeyFactory类相对应的类是SecretKeyFactory类，这个类用于生成秘密密钥。
+10. SecureRandom类继承于Random类（java.util.Random），它起到强加密随机数生成器（Random Number Generator，RNG）的作用，我们称之为安全随机数生成器，它同样是一个引擎类。  
+    SHA1PRNG算法是SecureRandom的默认算法。
+11. Signature类用来生成和验证数字签名，它同样是一个引擎类。
+12. SignedObject类是一个用来创建实际运行时对象的类，在检测不到这些对象的情况下，其完整性不会遭受损害。  
+    更明确地说，SignedObject包含另外一个Serializable对象，即要签名的对象及其签名，我们可以称之为签名对象。  
+    签名对象是对原始对象的“深层复制”（以序列化形式），一旦生成了副本，对原始对象的进一步操作就不再影响该副本。
+13. Timestamp类用于封装有关签署时间戳的信息，且它是不可更改的。  
+    它包括时间戳的日期和时间，以及有关生成和签署时间戳的Timestamping Authority（TSA）的信息。
+14. CodeSigner类封装了代码签名者的信息，且它是不可变的，我们称之为代码签名。  
+    它和数字时间戳（java.security.Timestamp）紧密相连。
+15. KeyStore类被称为密钥库，用于管理密钥和证书的存储。  
+    KeyStore 类是个引擎类，它提供一些相当完善的接口来访问和修改密钥仓库中的信息。
+16. 安全消息摘要又称消息认证（鉴别）码（Message Authentication Code，Mac）。  
+    Mac属于消息摘要的一种，但它不同于一般消息摘要（如MessageDigest提供的消息摘要实现），仅通过输入数据无法获得消息摘要，必须有一个由发送方和接收方共享的秘密密钥才能生成最终的消息摘要—安全消息摘要。
+17. Cipher类为加密和解密提供密码功能。它构成了Java Cryptographic Extension（JCE）框架的核心。  
+    除了完成数据的加密与解密，Cipher类还提供了对密钥的包装与解包。  
+    CipherInputStream和CipherOutputStream同属Cipher类的扩展，统称为密钥流。
+18. SealedObject类使程序员能够用加密算法创建对象并保护其机密性。
+19. java.security.spec包和javax.crypto.spec包都提供了密钥规范和算法参数规范的类和接口。获得密钥规范后，我们将有机会还原密钥对象。
+20. KeySpec接口不包含任何方法或常量。它仅用于将所有密钥规范分组，并为其提供类型安全。  
+    所有密钥规范都必须实现此接口。  
+    SecretKeySpec类是KeySpec接口的实现类，用于构建秘密密钥规范。
+21. AlgorithmParameterSpec接口不包含任何方法或常量。它仅用于将所有参数规范分组，并为其提供类型安全。  
+    所有参数规范都必须实现此接口。
+22. EncodedKeySpec类用编码格式来表示公钥和私钥，我们称之为编码密钥规范。  
+    X509EncodedKeySpec和PKCS8EncodedKeySpec两个类在加密解密环节中经常会用到。密钥很可能会以二进制方式存储于文件中，由程序来读取。这时候，就需要通过这两个类将文件中的字节数组读出转换为密钥对象。
+23. java.security.cert包提供证书解析和管理、证书撤销列表（CRL）和证书路径的类和接口。
+24. Certificate类是一个用于管理证书的抽象类。  
+    证书有多种类型，如X.509证书、PGP证书和SDSI证书，并且它们都以不同的方式存储并存储不同的信息，但却都可以通过继承Certificate类来实现它们。
+25. CertificateFactory类是一个引擎类，我们称之为证书工厂，可以通过它将证书导入程序中。
+26. 证书可能会由于各种原因失效，如由于申请证书的请求有问题或者用户使用该证书做了非法操作，这时证书将立即被置为无效。  
+    将证书置为无效的结果就是产生CRL（证书撤销列表）。  
+    CA负责发布CRL，CRL中列出了该CA已经撤销的证书。  
+    验证证书时，首先需要查询此列表，然后再考虑接受证书的合法性。  
+    CRL类作为证书抽象列表的抽象类，可通过扩展该抽象类定义专门的CRL类型。
+27. CertPath类是一个抽象类，定义了常用于所有CertPath的方法。其子类可处理不同类型的证书。  
+    所有CertPath对象都包含类型、Certificate列表及其支持的一种或多种编码。  
+    由于CertPath类是不可变的，所以构造CertPath后无法以任何外部可见的方式更改它。此规定适用于此类的所有公共字段和方法，以及由子类添加或重写的所有公共字段和方法。  
+    CertPath类作为证书链，它的操作离不开CertPathBuilder类和CertPathValidator类。
+28. javax.net.ssl包提供用于安全套接字包的类。
+29. KeyManagerFactory类是一个引擎类，它用来管理密钥，称为密钥管理工厂。
+30. TrustManagerFactory类是用于管理信任材料的管理器工厂。  
+    除了通过KeyManagerFactory和TrustManagerFactory两个工厂类来设定密钥库和信任库外，还可以通过System.setProperty(String key, Object value)进行密钥库、信任库文件路径及密码的设定。
+
+31. 重要类：
+
+    ```text
+        java.security.
+            Provider
+            Security
+            MessageDigest
+            DigestInputStream
+            DigestOutputStream
+            Key
+            PublicKey
+            PrivateKey
+            KeyPair
+            KeyPairGenerator
+            KeyFactory
+            SecureRandom
+            Signature
+            SignedObject
+            Timestamp
+            CodeSigner
+            KeyStore
+
+        java.security.spec.
+            KeySpec
+            AlgorithmParameterSpec
+
+        java.security.cert.
+            Certificate
+            CertificateFactory
+            CRL
+            CertPath
+
+        javax.crypto.
+            SecretKey
+            Mac
+            KeyGenerator
+            SecretKeyFactory
+            Cipher
+            SealedObject
+
+        javax.crypto.spec.
+            SecretKeySpec
+    ```
