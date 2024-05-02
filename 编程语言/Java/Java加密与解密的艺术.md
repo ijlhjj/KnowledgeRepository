@@ -356,3 +356,68 @@
     PFX文件由OpenSSL产生，可通过KeyTool导入至JKS密钥库/信任库中，由此完成密钥库的统一。
 13. 密钥库管理私钥，数字证书管理公钥，私钥和公钥分属消息传递两方，进行加密消息传递。  
     因此，我们可以将密钥库看做私钥相关操作的入口，数字证书则是公钥相关操作的入口。
+
+## 第 11 章  终极装备——安全协议
+
+1. HTTPS（Hypertext Transfer Protocol over Secure Socket Layer）协议是Web上最为常用的安全访问协议。  
+    HTTPS协议实际上是基于SSL/TLS的HTTP协议，位于应用层，简单地说，HTTPS=HTTP+SSL/TLS。  
+    HTTPS协议为数字证书提供了最佳的应用环境。  
+    受限于手机及手持设备的处理和存储能力，使用了简化的WTLS（Wireless Transport Layer Security，无线传输层安全）协议。
+2. SSL/TLS协议包含两个协议：  
+    SSL（Secure Socket Layer，安全套接字层）和TLS（Transport Layer Security，传输层安全）协议。SSL共有3个版本：SSL1.0、SSL2.0和SSL3.0。  
+    IETF在基于SSL3.0协议的基础上发布了TLS1.0、TLS1.0与SSL3.0几乎是兼容的。  
+    通常意义上我们提到的SSL/TLS协议指的是SSL3.0或TLS1.0的网络传输层安全协议。  
+    SSL/TLS协议通过使用数字证书确保网络交互安全，为数字证书的使用提供了最佳的应用环境。  
+    SSL/TLS协议利用密码学算法在互联网上提供端点身份认证和通信保密，完全基于PKI，有较高的安全性。
+3. 单向认证服务和双向认证服务是网络交互平台中最高级别的安全服务，广泛应用于电子商务等领域。  
+    单向认证服务：仅需要服务器端服务器提供证书，验证服务器身份。  
+    双向认证服务：需要服务器提供服务器证书的前提下，要求客户端提供客户证书，同时验证服务器和客户身份。
+4. 单向认证服务实现不需要实现任何代码，我们仅需要对Tomcat做细微调整，完成HTTPS协议配置和密钥库配置，即可完成服务构建工作。  
+    server.xml文件位于Tomcat的conf目录中
+
+    ```code
+        <Connector
+            port="443"
+            SSLEnabled="true"
+            clientAuth="false"
+            maxThreads="150"
+            protocol="HTTP/1.1"
+            scheme="https"
+            secure="true"
+            sslProtocol="TLS"
+            keystoreFile="conf/zlex.keystore"
+            keystorePass="123456" />
+    ```
+
+    为使得HTTPS协议配置生效，我们需要将密钥库文件参数keystoreFile指向密钥库文件，并设定密钥库密码参数keystorePass，密钥库类型参数keystoreType默认值为“JKS”。  
+    如果不显示配置信任库参数，信任库文件参数truststoreFile默认将指向密钥库文件，信任库密码参数truststorePass默认指向密钥库密码，信任库类型参数truststoreType默认值为“JKS”。  
+    这里我们需要注意客户端验证参数clientAuth，当前默认值为“false”。构建双向认证服务时需将其置为“true”，并修改密钥库参数和信任库参数。  
+    原有配置指定端口参数port为8443，而HTTPS协议绑定的端口是443，我们可以将其改为443，而无需通过端口访问HTTPS。
+5. 不同的客户端同一时间访问同一服务时，将有可能使用不同的协议或算法，唯一可以确定的是通过数字证书确定的非对称加密算法。
+6. 双向认证服务实现同样不需要实现任何代码，与单向认证服务构建几乎毫无差别。  
+    双向认证服务需要根证书、服务器证书和客户证书共3项证书。
+
+    ```code
+        <Connector
+            SSLEnabled="true"
+            clientAuth="true"
+            maxThreads="150"
+            port="443"
+            protocol="HTTP/1.1"
+            scheme="https"
+            secure="true"
+            sslProtocol="TLS"
+            keystoreFile="conf/server.p12"
+            keystorePass="123456"
+            keystoreType="PKCS12"
+            truststoreFile="conf/ca.p12"
+            truststorePass="123456"
+            truststoreType="PKCS12" />
+    ```
+
+    与单向认证服务配置不同，双向认证服务区分信任库文件和密钥库文件。此时，server.p12文件将作为密钥库文件，而ca.p12文件则作为信任库文件。  
+    在上述配置中，我们将客户端验证参数clientAuth的值置为“true”，这是打开双向认证的关键一步。
+7. 在Java环境中有密钥库和信任库之分。  
+    密钥库存储自身的密钥、证书等信息；  
+    而信任库存储来自外界的数字证书等信息。  
+    当甲乙双方完成自身密钥库初始化工作后，如果导入了对方的数字证书，双方就具备了互信的条件，也就可以构建双向认证服务了。
