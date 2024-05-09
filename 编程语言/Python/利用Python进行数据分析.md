@@ -345,3 +345,74 @@
                 结果Series是按频次降序排列的。value_counts是顶级的pandas方法，可用于NumPy数组或其他Python序列。
             与isin相关的是Index.get_indexer方法，它可以提供一个索引数组，将可能包含重复值的数组转换为唯一值的数组。
     ```
+
+## 第 6 章  数据加载、存储与文件格式
+
+1. pandas提供了一些用于将表格型数据读取为DataFrame对象的函数。  
+    其中一些函数会进行类型推断，也就是说，无须指定列的类型到底是数值、整数、布尔值还是字符串。  
+    其他的数据格式，如HDF5、ORC和Parquet，会在格式中嵌入数据类型。  
+    处理日期和其他自定义类型的处理需要多花点时间。
+
+    ![文件加载函数](images/利用Python进行数据分析-1.png "文件加载函数")
+
+2. pandas.read_csv 用于读取 CSV 格式文件，read_csv 返回 TextFileReader 类型对象。
+
+    ```text
+        在某些情况下，有些表格使用的可能不是固定的分隔符，而是用空白符或其他方式分隔字段。
+            这种情况下，可以传入一个正则表达式作为分隔符(sep="\s+")。
+        缺失数据经常是要么丢失（空字符串），要么用某些标记值（占位符）表示。
+            默认情况下，pandas会使用常见的标识，比如NA和NULL 。
+            read_csv有多种默认的NA标记值，可以用选项keep_default_na使其失效。
+        要逐块读取文件，可以指定chunksize作为行数。
+            TextFileReader对象可以根据chunksize对文件进行逐块迭代。
+            TextFileReader还有一个get_chunk方法，用于读取任意大小的数据块。
+        利用DataFrame的to_csv方法，可以将数据导出到逗号分隔的文件中。
+            缺失值在输出结果中会表示为空字符串。
+            如果没有设置其他选项，则会输出行和列的标签。
+        定义csv.Dialect的子类可定义出新格式（如专门的分隔符、字符串引用约定、行终止符等）。
+            也可以用关键字的形式将CSV格式参数提供给csv.reader，而无须定义子类。
+    ```
+
+    ![read_csv函数参数](images/利用Python进行数据分析-2.png "read_csv函数参数")
+
+3. JSON是应用程序之间交换数据的标准格式之一。
+
+    ```text
+        JSON的基本类型有对象（字典）、数组（列表）、字符串、数值、布尔值以及空值。
+        对象中所有的键都必须是字符串。
+        pandas.read_json可以自动将JSON数据集转换为指定形式的Series或DataFrame。
+            read_json的默认选项假设JSON数组中的每个对象是表格中的一行。
+            如果需要将数据从pandas输出到JSON，可以对Series和DataFrame使用to_json方法。
+    ```
+
+4. pandas有一个内置函数pandas.read_html，可以使用解析库自动将HTML文件中的表格解析为DataFrame对象。  
+    read_html默认条件下会搜索、尝试解析`<table>`标签内的所有表格数据。
+5. 所有pandas对象都有一个to_pickle方法，可以将数据以pickle格式保存到磁盘上。
+
+    ```text
+        pickle文件只对Python是可读的。
+            通过内置的pickle可以直接读取序列化数据，或者使用更为便捷的pandas.read_pickle 。
+        建议将pickle只用于短期存储格式。
+            其原因是很难保证该格式永远是稳定的。
+            现在序列化的对象可能无法被后续版本的库反序列化出来。
+            虽然pandas尽力保证做到向后兼容，但是今后说不定还是得抛弃pickle格式。
+    ```
+
+6. 使用pandas.ExcelFile类或pandas.read_excel函数，pandas还支持读取存储于Excel 2003（以及更高版本）文件中的表格型数据。  
+    在这些工具内部，它们分别使用附加组件包xlrd和openpyxl读取旧格式的XLS文件和新格式的XLSX文件。  
+    如果要将pandas数据写入Excel格式，必须首先创建ExcelWriter，然后用pandas对象的to_excel方法写入。  
+    如果不想使用ExcelWriter，可以将文件路径直接传递给to_excel 。
+7. 对于那些大到无法放入内存的数据集，HDF5是不错的选择，因为它可以高效读写大型数组中的一小部分。
+
+    ```text
+        要使用pandas读取HDF5文件，必须首先安装pytables包。
+        如果需要在本地处理海量数据，建议读者好好研究一下PyTables和h5py，看看它们是否满足你的需求。
+        由于大量数据分析问题都是IO密集型（而不是CPU密集型）问题，利用HDF5这样的工具能显著提升应用程序的效率。
+        HDF5不是数据库。它最适合用作“一次写多次读”的数据集。
+            虽然数据可以在任何时候被添加到文件中，但如果同时发生多个写操作，文件就可能会受到破坏。
+        HDFStore支持两种存储模式："fixed"和"table"（"fixed"是默认模式）。
+            后者通常更慢，但支持使用特殊语法进行查询操作。
+        pandas.read_hdf函数可以快捷使用这些工具。
+    ```
+
+8. pandas有一个read_sql函数，可以让你从通用的SQLAlchemy连接轻松读取数据。
