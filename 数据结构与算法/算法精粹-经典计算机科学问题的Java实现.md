@@ -156,7 +156,7 @@
 3. 遗传算法通常是高度专用的，需要针对特定应用进行调优。
 4. 遗传算法的概述：
 
-    ![遗传算法](images/算法精粹-经典计算机科学问题的Java实现-1-遗传算法.png "遗传算法")
+    ![遗传算法](images/算法精粹-经典计算机科学问题的Java实现-1-遗传算法.png)
 
 5. 最常见的两种遗传算法的选择方法称为轮盘式选择法(roulette-wheel selection)和锦标赛选择法(tournament selection)。  
     轮盘式选择法有时也称为适应度比例选择法(fitness proportionate selection)。轮盘式选择法让每条染色体都有机会被选中，与其适应度成正比。  
