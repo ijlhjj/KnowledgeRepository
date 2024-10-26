@@ -1,0 +1,166 @@
+1、<stdio.h> 标准输入和输出库
+    EOF                     标识文件结束的负整数
+    stdin                   标准输入
+    stdout                  标准输出
+    stderr                  标准错误
+
+    FILE                    文件流信息对象类型
+
+    int printf(const char *format, ...)                     发送格式化输出到标准输出 stdout
+    int sprintf(char *str, const char *format, ...)         发送格式化输出到字符串
+    int getchar(void)                                       从标准输入 stdin 获取一个字符（一个无符号字符）
+    int putchar(int char)                                   把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中
+    int scanf(const char *format, ...)                      从标准输入 stdin 读取格式化输入
+    int sscanf(const char *str, const char *format, ...)    从字符串读取格式化输入
+    FILE *fopen(const char *filename, const char *mode)     使用给定的模式 mode 打开 filename 所指向的文件
+    int fclose(FILE *stream)                                关闭流 stream。刷新所有的缓冲区
+    int fflush(FILE *stream)                                刷新流 stream 的输出缓冲区
+    int getc(FILE *stream)                                  从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动
+    int fgetc(FILE *stream)                                 从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动
+    int putc(int char, FILE *stream)                        把参数 char 指定的字符（一个无符号字符）写入到指定的流 stream 中，并把位置标识符往前移动
+    int fputc(int char, FILE *stream)                       把参数 char 指定的字符（一个无符号字符）写入到指定的流 stream 中，并把位置标识符往前移动
+    int fscanf(FILE *stream, const char *format, ...)       从流 stream 读取格式化输入
+    int fprintf(FILE *stream, const char *format, ...)      发送格式化输出到流 stream 中
+    int ferror(FILE *stream)                                测试给定流 stream 的错误标识符
+    int feof(FILE *stream)                                  测试给定流 stream 的文件结束标识符
+    char *fgets(char *str, int n, FILE *stream)             从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定
+    int fputs(const char *str, FILE *stream)                把字符串写入到指定的流 stream 中，但不包括空字符
+    char *gets(char *str)                                   从标准输入 stdin 读取一行，并把它存储在 str 所指向的字符串中。当读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定
+    int puts(const char *str)                               把一个字符串写入到标准输出 stdout，直到空字符，但不包括空字符。换行符会被追加到输出中
+    int ungetc(int char, FILE *stream)                      把字符 char（一个无符号字符）推入到指定的流 stream 中，以便它是下一个被读取到的字符
+    int remove(const char *filename)                        删除给定的文件名 filename
+    int rename(const char *old, const char *new)            把 old_filename 所指向的文件名改为 new_filename
+    FILE *tmpfile(void)                                     以二进制更新模式(wb+)创建临时文件
+    char *tmpnam(char *str)                                 生成并返回一个有效的临时文件名，该文件名之前是不存在的
+    void setbuf(FILE *stream, char *buffer)                 定义流 stream 应如何缓冲
+    long int ftell(FILE *stream)                            返回给定流 stream 的当前文件位置
+    void rewind(FILE *stream)                               设置文件位置为给定流 stream 的文件的开头
+
+2、<stdlib.h> 通用工具函数
+    NULL                    空指针常量值
+    EXIT_FAILURE            exit 函数失败时要返回的值
+    EXIT_SUCCESS            exit 函数成功时要返回的值
+    RAND_MAX                rand 函数返回的最大值
+
+    size_t                  无符号整数类型，sizeof 关键字的结果
+
+    int abs(int x)                                          返回 x 的绝对值
+    div_t div(int numer, int denom)                         分子除以分母
+    void srand(unsigned int seed)                           设置由函数 rand 使用的随机数发生器
+    int rand(void)                                          返回一个范围在 0 到 RAND_MAX 之间的伪随机数
+    int atoi(const char *str)                               把参数 str 所指向的字符串转换为一个整数（类型为 int 型）
+    double atof(const char *str)                            把参数 str 所指向的字符串转换为一个浮点数
+    void *calloc(size_t nitems, size_t size)                分配所需的内存空间，并返回一个指向它的指针
+    void *malloc(size_t size)                               分配所需的内存空间，并返回一个指向它的指针
+    void *realloc(void *ptr, size_t size)                   尝试重新调整之前调用 malloc 或 calloc 所分配的 ptr 所指向的内存块的大小
+    void free(void *ptr)                                    释放之前调用 calloc、malloc 或 realloc 所分配的内存空间
+    void abort(void)                                        使一个异常程序终止
+    void exit(int status)                                   使程序正常终止
+    int atexit(void (*func)(void))                          当程序正常终止时，调用指定的函数 func
+    int system(const char *string)                          由 string 指定的命令传给要被命令处理器执行的主机环境
+    char *getenv(const char *name)                          搜索 name 所指向的环境字符串，并返回相关的值给字符串
+
+    void *bsearch(const void *key, const void *base, size_t nitems, size_t size, int (*compar)(const void *, const void *))             执行二分查找
+    void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*))                                        数组快速排序
+
+3、<stddef.h> 定义各种变量类型和宏。这些定义中的大部分也出现在其它头文件中。
+    NULL                    空指针常量值
+
+    ptrdiff_t               有符号整数类型，两个指针相减的结果
+    size_t                  无符号整数类型，sizeof 关键字的结果
+
+4、<stdarg.h> 可变参数的函数工具类
+    va_list                 适用于 va_start()、va_arg() 和 va_end() 这三个宏存储信息的类型
+
+    void va_start(va_list ap, last_arg)                     初始化 ap 变量。last_arg 是最后一个传递给函数的已知的固定参数，即省略号之前的参数
+    type va_arg(va_list ap, type)                           检索函数参数列表中类型为 type 的下一个参数
+    void va_end(va_list ap)                                 允许使用了 va_start 宏的带有可变参数的函数返回。如果在从函数返回之前没有调用 va_end，则结果为未定义
+
+11、<limits.h> 各变量类型的取值限制
+    CHAR_MIN                char 最小值
+    CHAR_MAX                char 最大值
+    SHRT_MIN                short 最小值
+    SHRT_MAX                short 最大值
+    INT_MIN                 int 最小值
+    INT_MAX                 int 最大值
+    LONG_MIN                long 最小值
+    LONG_MAX                long 最大值
+
+12、<float.h> 平台相关的浮点值常量
+    FLT_MIN                 float 最小值
+    FLT_MAX                 float 最大值
+    DBL_MIN                 double 最小值
+    DBL_MAX                 double 最大值
+
+13、<string.h> 操作字符数组的函数
+    NULL                    空指针常量值
+
+    size_t                  无符号整数类型，sizeof 关键字的结果
+
+    size_t strlen(const char *str)                                  计算字符串 str 的长度，直到空结束字符，但不包括空结束字符
+    char *strstr(const char *haystack, const char *needle)          在字符串 haystack 中查找第一次出现字符串 needle（不包含空结束字符）的位置
+    char *strcpy(char *dest, const char *src)                       把 src 所指向的字符串复制到 dest
+    char *strncpy(char *dest, const char *src, size_t n)            把 src 所指向的字符串复制到 dest，最多复制 n 个字符
+    int strcmp(const char *str1, const char *str2)                  把 str1 所指向的字符串和 str2 所指向的字符串进行比较
+    int strncmp(const char *str1, const char *str2, size_t n)       把 str1 和 str2 进行比较，最多比较前 n 个字节
+    char *strcat(char *dest, const char *src)                       把 src 所指向的字符串追加到 dest 所指向的字符串的结尾
+    char *strncat(char *dest, const char *src, size_t n)            把 src 所指向的字符串追加到 dest 所指向的字符串的结尾，直到 n 字符长度为止
+    char *strchr(const char *str, int c)                            在参数 str 所指向的字符串中搜索第一次出现字符 c（一个无符号字符）的位置
+    char *strrchr(const char *str, int c)                           在参数 str 所指向的字符串中搜索最后一次出现字符 c（一个无符号字符）的位置
+    size_t strspn(const char *str1, const char *str2)               检索字符串 str1 中第一个不在字符串 str2 中出现的字符下标
+    size_t strcspn(const char *str1, const char *str2)              检索字符串 str1 开头连续有几个字符都不含字符串 str2 中的字符
+    char *strpbrk(const char *str1, const char *str2)               检索字符串 str1 中第一个匹配字符串 str2 中字符的字符，不包含空结束字符。也就是说，依次检验字符串 str1 中的字符，当被检验字符在字符串 str2 中也包含时，则停止检验，并返回该字符位置
+    char *strtok(char *str, const char *delim)                      分解字符串 str 为一组字符串，delim 为分隔符
+
+    void *memcpy(void *dest, const void *src, size_t n)             从 src 复制 n 个字符到 dest
+    void *memmove(void *dest, const void *src, size_t n)            另一个用于从 src 复制 n 个字符到 dest 的函数
+    int memcmp(const void *str1, const void *str2, size_t n)        把 str1 和 str2 的前 n 个字节进行比较
+    void *memchr(const void *str, int c, size_t n)                  在参数 str 所指向的字符串的前 n 个字节中搜索第一次出现字符 c（一个无符号字符）的位置
+    void *memset(void *str, int c, size_t n)                        复制字符 c（一个无符号字符）到参数 str 所指向的字符串的前 n 个字符
+
+14、<ctype.h> 测试和映射字符的函数
+
+    int islower(int c)              字符是否是小写字母
+    int isupper(int c)              字符是否是大写字母
+    int isdigit(int c)              字符是否是十进制数字
+    int isspace(int c)              字符是否是空白字符
+    int isalpha(int c)              字符是否是字母
+    int isalnum(int c)              字符是否是字母和数字
+    int tolower(int c)              把大写字母转换为小写字母
+    int toupper(int c)              把小写字母转换为大写字母
+
+15、<math.h> 数学函数
+
+    double pow(double x, double y)              返回 x 的 y 次幂
+    double sqrt(double x)                       返回 x 的平方根
+    double ceil(double x)                       返回大于或等于 x 的最小的整数值
+    double floor(double x)                      返回小于或等于 x 的最大的整数值
+    double fabs(double x)                       返回 x 的绝对值
+
+16、<time.h> 日期和时间函数
+
+    clock_t             存储处理器时间的类型
+    time_t              存储日历时间的类型
+    struct tm           保存时间和日期的结构
+        struct tm {
+           int tm_sec;         /* 秒，范围从 0 到 59        */
+           int tm_min;         /* 分，范围从 0 到 59        */
+           int tm_hour;        /* 小时，范围从 0 到 23        */
+           int tm_mday;        /* 一月中的第几天，范围从 1 到 31    */
+           int tm_mon;         /* 月，范围从 0 到 11        */
+           int tm_year;        /* 自 1900 年起的年数        */
+           int tm_wday;        /* 一周中的第几天，范围从 0 到 6    */
+           int tm_yday;        /* 一年中的第几天，范围从 0 到 365    */
+           int tm_isdst;       /* 夏令时                */
+        };
+
+    clock_t clock(void)                                             返回程序执行起（一般为程序的开头），处理器时钟所使用的时间
+    time_t time(time_t *timer)                                      计算当前日历时间，并把它编码成 time_t 格式
+    double difftime(time_t time1, time_t time2)                     返回 time1 和 time2 之间相差的秒数 (time1-time2)
+    time_t mktime(struct tm *timeptr)                               把 timeptr 所指向的结构转换为一个依据本地时区的 time_t 值
+    char *asctime(const struct tm *timeptr)                         返回一个指向字符串的指针，它代表了结构 timeptr 的日期和时间
+    char *ctime(const time_t *timer)                                返回一个表示当地时间的字符串，当地时间是基于参数 timer
+    struct tm *localtime(const time_t *timer)                       timer 的值被分解为 tm 结构，并用本地时区表示
+    struct tm *gmtime(const time_t *timer)                          timer 的值被分解为 tm 结构，并用协调世界时（UTC）也被称为格林尼治标准时间（GMT）表示
+
+    size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)            根据 format 中定义的格式化规则，格式化结构 timeptr 表示的时间，并把它存储在 str 中

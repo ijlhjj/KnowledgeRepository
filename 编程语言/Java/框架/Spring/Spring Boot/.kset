@@ -1,0 +1,110 @@
+1、Spring的核心是提供了一个容器（container），通常称为Spring应用上下文（Spring application context），它们会创建和管理应用组件。
+2、在Spring技术中，自动配置起源于所谓的自动装配（autowiring）和组件扫描（component scanning）。借助组件扫描技术，Spring能够自动发现应用类路径下的组件，并将它们创建成Spring应用上下文中的bean。借助自动装配技术，Spring能够自动为组件注入它们所依赖的其他bean。
+3、SpringBoot是Spring框架的扩展，提供了很多增强生产效率的方法。最为大家所熟知的增强方法就是自动配置（autoconfiguration），SpringBoot能够基于类路径中的条目、环境变量和其他因素合理猜测需要配置的组件并将它们装配在一起。
+SpringBoot大幅度减少了构建应用所需的显式配置的数量（不管是XML配置还是Java配置）。
+4、打包为JAR文件是基于云思维做出的选择。尽管WAR文件非常适合部署到传统的Java应用服务器上，但对于大多数云平台来说它们并不是理想的选择。有些云平台也能够部署和运行WAR文件，但是所有的Java云平台都能够运行可执行的JAR文件。因此，SpringInitializr默认会使用基于JAR的打包方式，除非我们明确告诉它采用其他的方式。
+如果你想要将应用部署到传统的Java应用服务器上，那么需要选择使用基于WAR的打包方式并要包含一个Web初始化类。
+5、SpringBoot项目要以spring-boot-starter-parent作为其父POM，这个父POM为Spring项目常用的一些库提供了依赖管理，现在你不需要指定它们的版本，因为这是通过父POM来管理的。
+6、starter依赖主要有3个好处：
+    构建文件会显著减小并且更易于管理，因为这样不必为每个所需的依赖库都声明依赖。
+    我们能够根据它们所提供的功能来思考依赖，而不是根据库的名称。
+    我们不必再担心库版本的问题。你可以直接相信给定版本的Spring Boot，传递性引入的库的版本是兼容的。
+7、Spring Boot插件提供了一些重要的功能：
+    它提供了一个Maven goal，允许我们使用Maven来运行应用。
+    它会确保依赖的所有库都会包含在可执行JAR文件中，并且能够保证它们在运行时类路径下是可用的。
+    它会在JAR中生成一个manifest文件，将引导类声明为可执行JAR的主类。
+8、@SpringBootApplication是一个组合注解，它组合了3个其他的注解：
+    @SpringBootConfiguration：将该类声明为配置类，这个注解实际上是@Configuration注解的特殊形式。
+    @EnableAutoConfiguration：启用Spring Boot的自动配置。
+    @ComponentScan：启用组件扫描。
+9、SpringApplication中静态的run()方法会执行应用的引导过程，也就是创建Spring的应用上下文。在传递给run()的两个参数中，一个是配置类，另一个是命令行参数。尽管传递给run()的配置类不一定要和引导类相同，但这是最便利和最典型的做法。
+10、@RunWith是JUnit的注解，它会提供一个测试运行器（runner）来指导JUnit如何运行测试。可以将其想象为给JUnit应用一个插件，以提供自定义的测试行为。
+11、@SpringBootTest会告诉JUnit在启动测试的时候要添加上Spring Boot的功能。
+12、DevTools为Spring开发人员提供了一些便利的开发期工具，其中包括：
+    代码变更后应用会自动重启；
+    当面向浏览器的资源（如模板、JavaScript、样式表）等发生变化时，会自动刷新浏览器；
+    自动禁用模板缓存；
+    如果使用H2数据库的话，内置了H2控制台。
+需要注意，DevTools并不是IDE插件，它也不需要你使用特定的IDE。在SpringToolSuite、IntelliJIDEA和NetBeans中，它都能很好地运行。另外，因为它的目的是仅仅用于开发，所以能够很智能地在生产环境中把自己禁用掉。
+13、当DevTools运行的时候，应用程序会被加载到Java虚拟机（JVM）两个独立的类加载器中。其中一个类加载器会加载你的Java代码、属性文件以及项目中“src/main/”路径下几乎所有的内容。这些条目很可能会经常发生变化。另外一个类加载器会加载依赖的库，这些库不太可能经常发生变化。当探测到变更的时候，DevTools只会重新加载包含项目代码的类加载器，并重启Spring的应用上下文，在这个过程中另外一个类加载器和JVM会原封不动。这个策略非常精细，但是它能减少应用启动的时间。这种策略的一个不足之处就是自动重启无法反映依赖项的变化。这是因为包含依赖库的类加载器不会自动重新加载。这意味着每当我们在构建规范中添加、变更或移除依赖的时候，为了让变更生效，我们需要重新启动应用。
+14、Spring Boot还提供了其他一些有用的特性：
+    Actuator能够洞察应用运行时的内部工作状况，包括指标、线程dump信息、应用的健康状况以及应用可用的环境属性；
+    灵活的环境属性规范；
+    在核心框架的测试辅助功能之上提供了对测试的额外支持。
+15、Spring Integration解决了实时集成问题。在实时集成中，数据在可用时马上就会得到处理。
+相反，Spring Batch解决的则是批处理集成的问题，在此过程中，数据可以收集一段时间，直到某个触发器（可能是一个时间触发器）发出信号，表示该处理批量数据了才会对数据进行批处理。
+16、Spring Cloud是使用Spring开发云原生应用程序的一组项目。
+17、Spring实战5
+第一章小结：
+    Spring旨在简化开发人员所面临的挑战，比如创建Web应用程序、处理数据库、保护应用程序以及实现微服务。
+    Spring Boot构建在Spring之上，通过简化依赖管理、自动配置和运行时洞察，使Spring更加易用。
+    Spring应用程序可以使用Spring Initializr进行初始化。Spring Initializr是基于Web的应用，并且为大多数Java开发环境提供了原生支持。
+    在Spring应用上下文中，组件（通常称为bean）既可以使用Java或XML显式声明，也可以通过组件扫描发现，还可以使用Spring Boot自动配置功能实现自动化配置。
+第二章小结：
+    Spring提供了一个强大的Web框架，名为Spring MVC，能够用来为Spring应用开发Web前端。
+    Spring MVC是基于注解的，通过像@RequestMapping、@GetMapping和@PostMapping这样的注解来启用请求处理方法的声明。
+    大多数的请求处理方法最终会返回一个视图的逻辑名称，比如Thymeleaf模板，请求会转发到这样的视图上（同时会带有任意的模型数据）。
+    Spring MVC支持校验，这是通过Java Bean Validation API和Validation API的实现（如Hibernate Validator）完成的。
+    对于没有模型数据和逻辑处理的HTTP GET请求，可以使用视图控制器。
+    除了Thymeleaf之外，Spring支持各种视图方案，包括FreeMarker、Groovy Templates和Mustache。
+第三章小结：
+    Spring的JdbcTemplate能够极大地简化JDBC的使用。
+    在我们需要知道数据库所生成的ID值时，可以组合使用PreparedStatementCreator和KeyHolder。
+    为了简化数据的插入，可以使用SimpleJdbcInsert。
+    Spring Data JPA能够极大地简化JPA持久化，我们只需编写repository接口即可。
+第四章小结：
+    Spring Security的自动配置是实现基本安全性功能的好办法，但是大多数的应用都需要显式的安全配置，这样才能满足特定的安全需求。
+    用户详情可以通过用户存储进行管理，它的后端可以是关系型数据库、LDAP或完全自定义实现。
+    Spring Security会自动防范CSRF攻击。
+    已认证用户的信息可以通过SecurityContext对象来获取，也可以借助@AuthenticationPrincipal注解将其注入到控制器中。
+第五章小结：
+    Spring bean可以添加@ConfigurationProperties注解，这样就能够从多个属性源中选取一个来注入它的值。
+    配置属性可以通过命令行参数、环境变量、JVM系统属性、属性文件或YAML文件等方式进行设置。
+    配置属性可以用来覆盖自动配置相关的设置，包括指定数据源URL和日志级别。
+    Spring profile可以与属性源协同使用，从而能够基于激活的profile条件化地设置配置属性。
+18、Spring Boot的自动配置功能发现Thymeleaf在类路径中时，会为Spring MVC创建支撑Thymeleaf视图的bean。
+19、可以使用 “mvn spring-boot:run” 构建命令来运行Spring Boot应用。
+20、通常来讲，你只需要选择想要的视图模板库，将其作为依赖项添加到构建文件中，然后就可以在templates目录下编写模板了。Spring Boot会探测到你所选择的模板库，并自动配置为Spring MVC控制器生成视图所需的各种组件。
+21、只有在将应用构建为WAR文件并部署到传统的Servlet容器中时，才能选择JSP方案。如果你想要构建可执行的JAR文件，那么必须选择Thymeleaf、FreeMarker等其他方案。
+22、@SessionAttributes注解能够指定对象保存在session中，这样才能跨请求使用。@ModelAttribute注解能够指定对象保存在请求模型中。
+23、常用JPA注解：
+    @Entity：将Bean声明为JPA实体（JPA需要实体有一个无参的构造器）；
+    @Id：指定字段作为数据库主键；
+    @GeneratedValue：将它的strategy设置为AUTO，将依赖数据库自动生成ID值。
+    @ManyToMany：对象之间的多对多关联关系；
+    @PrePersist：在持久化之前调用的方法；
+    @Table：实体对应的数据库表；
+24、Lombok的@Data注解会添加一个有参构造器，但是使用@NoArgsConstructor注解之后，这个构造器就会被移除掉。@RequiredArgsConstructor注解可以显式添加有参构造器。@NoArgsConstructor注解可以通过将access属性设置为AccessLevel.PRIVATE使其变成私有，可以将force属性设置为true强制Lombok生成的构造器将属性设置为null。
+25、Spring Data的repository需要继承CrudRepository接口。CrudRepository定义了很多用于CRUD（创建、读取、更新、删除）操作的方法。它的第一个参数是repository要持久化的实体类型，第二个参数是实体ID属性的类型。
+26、Spring Data的repository方法是由一个动词、一个可选的主题（Subject）、关键词By以及一个断言所组成的。
+尽管方法的主题是可选的，但因为CrudRepository的类型是参数化的，所以Spring Data会忽略主题中大部分的单词。
+27、尽管方法名称约定对于相对简单的查询非常有用，但是对于更为复杂的查询，方法名可能会面临失控的风险。在这种情况下，我们可以使用@Query执行任何想要的查询，有些查询是通过方法命名约定很难甚至根本无法实现的。
+28、Spring的环境抽象是各种配置属性的一站式服务。它抽取了原始的属性，这样需要这些属性的bean就可以从Spring本身中获取了。Spring环境会拉取多个属性源，包括：
+    JVM系统属性；
+    操作系统环境变量；
+    命令行参数；
+    应用属性配置文件。
+SpringBoot自动配置的bean都可以通过Spring环境提取的属性进行配置。
+29、我们可以将server.port属性显式设置成0，但是服务器并不会真的在端口0上启动。相反，它会任选一个可用的端口。在我们运行自动化集成测试的时候，这会非常有用，因为这样能够保证并发运行的测试不会与硬编码的端口号冲突。
+如果不关心应用在哪个端口启动，那么这种配置方式也非常有用，因为此时应用将会变成通过服务注册中心来进行查找的微服务。
+30、默认情况下，Spring Boot通过Logback配置日志，日志会以INFO级别写入到控制台中。
+31、为了支持配置属性的注入，Spring Boot提供了@ConfigurationProperties注解。将它放到Spring bean上之后，它就会为该bean中那些能够根据Spring环境注入值的属性赋值。
+@ConfigurationProperties通常会放到一种特定类型的bean中（配置属性持有者），这种bean的目的就是持有配置数据。这样的话，特定的配置细节就能从其他类中抽离出来，多个bean也能更容易地共享一些通用的配置。
+配置属性持有者并没有什么特别之处。它们只是将Spring环境注入到其属性中的bean。
+32、配置属性的元数据完全是可选的，它并不会妨碍配置属性的运行。但是，元数据对于为配置属性提供一个最小化的文档非常有用，在IDE中尤为如此。
+为了创建自定义配置属性的元数据，我们需要在META-INF下创建一个名为additional-spring-configuration-metadata.json的文件（比如，在项目的“src/main/resources/META-INF”目录下）。
+配置属性元数据示例如下：
+	{
+		"properties": [{
+			"name": "taco.orders.page-size",
+			"type": "java.lang.String",
+			"description": "Sets the maximum number of orders to display in a list."
+		}]
+	}
+33、Spring profile是一种条件化的配置，在运行时，根据哪些profile处于激活状态，可以使用或忽略不同的bean、配置类和配置属性。
+34、定义profile文件的名称要遵守如下的约定：application-{profile名}.yml或application-{profile名}.properties。
+另外一种方式仅适用于YAML配置，它会将特定profile的属性和非profile的属性都放到application.yml中，它们之间使用3个中划线进行分割，并且使用spring.profiles属性来命名profile。
+35、如果我们不激活这些profile，声明profile相关的属性其实没有任何用处。推荐使用环境变量来设置处于激活状态的profile。
+可以设置多个激活的profile，如果使用环境变量，通常这可以通过逗号分隔的列表来实现。
+    export SPRING_PROFILES_ACTIVE=prod,audit,ha
+36、@Profile注解可以将bean设置为仅适用于给定的profile，可以在带有@Configuration注解的类上使用@Profile注解。

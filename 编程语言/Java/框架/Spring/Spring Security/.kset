@@ -1,0 +1,20 @@
+1、Spring Security不管你使用哪一个密码转码器，都需要理解一点，即数据库中的密码是永远不会解码的。用户在登录时所采取的策略与之相反，输入的密码会按照相同的算法进行转码，然后与数据库中已经转码过的密码进行对比。这个对比是在PasswordEncoder的matches()方法中进行的。
+2、Spring Security的UserDetailsService是一个相当简单直接的接口：
+这个接口的loadByUsername()方法会得到一个用户名，并且要么返回查找到的UserDetails对象，要么在根据用户名无法得到任何结果的情况下抛出UsernameNotFoundException。
+3、WebSecurityConfigurerAdapter的configure()方法接受一个HttpSecurity对象，能够用来配置在Web级别该如何处理安全性：
+    在为某个请求提供服务之前，需要预先满足特定的条件；
+    配置自定义的登录页；
+    支持用户退出应用；
+    预防跨站请求伪造。
+4、configure方法中配置规则的顺序是很重要的，声明在前面的安全规则比后面声明的规则有更高的优先级。
+5、默认情况下，SpringSecurity会在“/login”路径监听登录请求并且预期的用户名和密码输入域的名称为username和password，但这是可配置的。
+6、默认情况下，登录成功之后，用户将会被导航到Spring Security决定让用户登录之前的页面。
+如果用户直接访问登录页，那么登录成功之后用户将会被导航至根路径，可以通过指定默认的成功页来更改这种行为。
+另外，我们还可以强制要求用户在登录成功之后统一访问的页面，即便用户在登录之前正在访问其他页面，在登录之后也会被定向到指定页面，这可以通过为defaultSuccessUrl方法传递第二个参数true来实现。
+7、为了启用退出功能，我们只需在HttpSecurity对象上调用logout方法，这样会搭建一个安全过滤器，该过滤器会拦截对“/logout”的请求。当用户调用退出的时候，他们的session将会被清理。默认情况下，用户会被重定向到登录页面，可以调用logoutSuccessUrl()指定退出后导航到其他页面。
+8、跨站请求伪造（Cross-Site Request Forgery，CSRF）是一种常见的安全攻击。它会让用户在一个恶意的Web页面上填写信息，然后自动（通常是秘密的）将表单以攻击受害者的身份提交到另外一个应用上。
+为了防止这种类型的攻击，应用可以在展现表单的时候生成一个CSRF token，并放到隐藏域中，然后将其临时存储起来，以便后续在服务器上使用。在提交表单的时候，token将和其他的表单数据一起发送至服务器端。请求会被服务器拦截，并与最初生成的token进行对比。如果token匹配，那么请求将会允许处理；否则，表单肯定是由恶意网站渲染的，因为它不知道服务器所生成的token。
+9、Spring Security提供了内置的CSRF保护，默认它就是启用的，我们不需要显式配置它。我们唯一需要做的就是确保应用中的每个表单都要有一个名为“_csrf”的字段，它会持有CSRF token。
+如果使用Spring MVC的JSP标签库或者Spring Security的Thymeleaf方言，不用明确包含这个隐藏域（这个隐藏域会自动生成）。
+10、CSRF的防护非常重要，并且很容易在表单中实现，所以我们没有理由禁用它。不要禁用CSRF防护，不要禁用CSRF防护，不要禁用CSRF防护！
+11、在Controller中注入认证User对象最简洁的方案是使用@AuthenticationPrincipal注解。

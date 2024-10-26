@@ -1,0 +1,2 @@
+1、Spring MVC的核心是控制器（controller）的理念。控制器是处理请求并以某种方式进行信息响应的类。
+2、放到控制器参数Model属性中的数据将会复制到Servlet Response的属性中。

@@ -1,0 +1,163 @@
+1、Python常用工具包：
+    numpy                   pip install numpy                   科学计算
+    scipy                   pip install scipy                   科学计算
+    pandas                  pip install pandas                  数据分析
+    requests                pip install requests                HTTP 库
+    SQLAlchemy              pip install SQLAlchemy              数据库抽象包
+    Scrapy                  pip install Scrapy                  网络爬虫
+    pipenv                  pip install pipenv                  Python虚拟环境管理工具
+    pylint                  pip install pylint                  Python代码静态检查器
+    Pillow                  pip install Pillow                  Python图像库
+
+2、二进制工具包：
+    bitstring               pip install bitstring
+    construct               pip install construct
+    hachoir                 pip install hachoir
+
+3、日期时间工具包：
+    arrow                   pip install arrow
+    python-dateutil         pip install python-dateutil
+    iso8601                 pip install iso8601
+    fleming                 pip install fleming
+    maya                    pip install maya
+
+4、命令行工具包：
+    invoke                  pip install invoke                  任务执行库，管理面向shell的子流程
+    fabric2                 pip install fabric2                 通过SSH远程执行shell命令
+    click                   pip install click                   可组合的命令行界面工具包
+    doit                    pip install doit                    自动化工具包
+    sh                      pip install sh                      子流程替换
+    pypeln                  pip install pypeln                  创建并发数据管道
+
+5、事件驱动网络框架：
+    gevent                  pip install gevent                  基于协程的网络库
+    tornado                 pip install tornado                 Web框架和异步网络库
+    Twisted                 pip install Twisted                 异步网络框架
+
+6、任务队列：
+    celery                  pip install celery                  分布式任务队列
+    rq                      pip install rq                      创建和处理后台作业
+    queues                  pip install queues                  用于与轻量级队列服务交互的最低通用API
+
+7、格式文件处理：
+    tablib                  pip install tablib                  格式无关的表格数据库（XLS、JSON、YAML、CSV等）
+    tiledb                  pip install tiledb                  TileDB阵列存储管理器接口
+    docx-hitalent           pip install docx-hitalent           创建和更新Microsoft Word（.docx）文件
+    python4excel            pip install python4excel            处理Excel文件
+    oletools                pip install oletools                用于分析MS Office和OLE文件
+    python-magic            pip install python-magic            文件类型识别
+    reportlab               pip install reportlab               生成PDF和图形的开源Python库
+
+8、数据库包：
+    dataset                 pip install dataset                 数据库访问工具包
+    records                 pip install records                 对关系数据库进行原始SQL查询
+    aiomysql                pip install aiomysql                异步MySQL驱动程序
+    aioredis                pip install aioredis                异步redis支持库
+    asyncpg                 pip install asyncpg                 异步PostgreSQL驱动程序
+
+9、网络数据侦听分析：
+    scapy                   pip install scapy                   交互式数据包操作工具
+    netcat                  pip install netcat                  网络端口连接侦听包
+
+10、数据序列化：
+    dill                    pip install dill
+    msgpack                 pip install msgpack
+    avro                    pip install avro
+    Serialize               pip install Serialize               支持多种序列化格式的通用API
+    marshmallow             pip install marshmallow
+
+11、远程调用RPC：
+    thrift                  pip install thrift                  Apache Thrift RPC 的Python实现
+    jsonrpcserver           pip install jsonrpcserver           JSON-RPC服务端
+    jsonrpcclient           pip install jsonrpcclient           JSON-RPC客户端
+    rpc-msgpack             pip install rpc-msgpack             RPC with MessagePack
+    grpcio                  pip install grpcio                  基于HTTP的RPC框架
+    grpcio-tools            pip install grpcio-tools            gRPC的Protobuf代码生成器
+    twirp                   pip install twirp
+
+12、远程管理工具：
+    salt                    pip install salt                    远程执行和配置管理系统
+    ansible                 pip install ansible                 简单的IT自动化系统
+    fabric2                 pip install fabric2                 高级SSH命令执行
+
+13、Web服务器：
+    bottle                  pip install bottle                  适用于小型Web应用程序框架
+    Flask                   pip install Flask                   轻量级WSGI Web应用程序框架
+    Django                  pip install Django                  适用于大型站点的高级Python Web框架
+    uWSGI                   pip install uWSGI
+    CherryPy                pip install CherryPy
+    fastapi                 pip install fastapi
+    py4web                  pip install py4web
+    pyramid                 pip install pyramid
+    masonite                pip install masonite
+    Jinja2                  pip install Jinja2                  模板引擎
+    hypercorn               pip install hypercorn               基于Hyper库并受Gunicorn启发的ASGI服务器
+    sanic                   pip install sanic                   为快速运行而编写的Web服务器和Web框架
+    uvicorn                 pip install uvicorn                 快速的ASGI服务器
+    aiohttp                 pip install aiohttp                 异步http客户端/服务器框架
+    blacksheep              pip install blacksheep              异步的快速Web框架
+    channels                pip install channels                为Django 3.2及更高版本带来异步、事件驱动的功能
+    muffin                  pip install muffin                  快速、简单的异步Web框架
+    quart                   pip install quart                   与Flask具有相同API的ASGI Web微框架
+    starlette               pip install starlette               轻量级的异步ASGI框架/工具包
+
+14、网络爬虫：
+    beautifulsoup4          pip install beautifulsoup4          从网页中抓取信息
+    requests-html2          pip install requests-html2          HTML解析库
+
+15、单元测试：
+    nose2                   pip install nose2
+    tox                     pip install tox
+    green                   pip install green
+
+16、持续集成：
+    buildbot                pip install buildbot
+    travis-ci-cd            pip install travis-ci-cd
+
+17、图像处理：
+    Wand                    pip install Wand
+    vpython                 pip install vpython                 3D动画库
+    pi3d                    pip install pi3d                    3D图形库
+
+18、GUI库：
+    PySide6                 pip install PySide6                 Qt的Python绑定
+    PyQt6                   pip install PyQt6                   Qt的Python绑定
+    wxPython                pip install wxPython                wxWidgets的Python绑定
+
+19、数据可视化：
+    matplotlib              pip install matplotlib
+    seaborn                 pip install seaborn
+    bokeh                   pip install bokeh
+
+20、数据验证：
+    email-validate          pip install email-validate          电子邮件验证器
+    phonenumbers            pip install phonenumbers            解析、格式化、存储和验证国际电话号码
+    validators              pip install validators              面向人类的Python数据验证
+    pydantic                pip install pydantic                使用Python类型提示进行数据验证和设置管理
+    Cerberus                pip install Cerberus                用于Python字典的轻量级、可扩展的模式和数据验证工具
+
+21、地图相关：
+    pyshp                   pip install pyshp                   对ESRI Shapefile格式的读/写支持
+    geopandas               pip install geopandas               为pandas对象添加地理数据支持
+    shapely                 pip install shapely                 几何对象的操作和分析
+    Fiona                   pip install Fiona                   将简单的要素数据流式传输到GIS格式
+    pyproj                  pip install pyproj                  Python interface to PROJ
+    geopy                   pip install geopy                   几个流行的地理编码Web服务的Python客户端
+
+22、并发：
+    curio                   pip install curio                   用于并发系统编程的基于协程的库
+    trio                    pip install trio                    用于异步并发和I/O的Python库
+    asks                    pip install asks                    用于curio、trio和asyncio的异步http库
+    anyio                   pip install anyio                   异步网络和并发库
+
+
+99、其他：
+    psutil                  pip install psutil                  跨平台的获取进程和系统信息包
+    pydantic                pip install pydantic                使用python类型提示进行数据验证和设置管理
+    dask                    pip install dask                    用于分析的并行计算库
+    httpie                  pip install httpie                  命令行HTTP客户端
+    connexion               pip install connexion               根据YAML格式描述的API规范自动处理HTTP请求
+    datasette               pip install datasette               用于探索和发布数据的工具集
+    flask-openapi3          pip install flask-openapi3          为Flask项目生成REST API和OpenAPI文档
+    pyflakes                pip install pyflakes                Python代码检查器
+    poetry                  pip install poetry                  依赖关系管理和打包工具
